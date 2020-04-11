@@ -10,12 +10,10 @@ import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
-import javax.sound.sampled.LineUnavailableException;
-
 public class Sistema extends Observable implements Observer {
     // clase
     private static Sistema instancia;
-    private static final int NRO_PUERTO = 123;
+    private static final int NRO_PUERTO_RECEPTOR = 123, NRO_PUERTO_DIRECTORIO = 100;
     // instancia
     private Agenda agenda;
     private InternetManager internetManager;
