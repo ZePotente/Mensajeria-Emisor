@@ -38,7 +38,7 @@ public class Sistema extends Observable implements Observer {
     public void enviarMensaje(Mensaje mensaje) throws UnknownHostException, IOException {
         String mensajeString = mensaje.desarmar();
         internetManager.enviarMensaje(mensaje.getDestinatario().getNombre(),
-                                                mensaje.getDestinatario().getNumeroDeIP(), NRO_PUERTO, mensajeString);
+                                                mensaje.getDestinatario().getNumeroDeIP(), NRO_PUERTO_RECEPTOR, mensajeString);
     }
 
     public ArrayList<Usuario> getDestinatarios() {
