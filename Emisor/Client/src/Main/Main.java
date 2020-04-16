@@ -2,8 +2,6 @@ package Main;
 
 import Controladores.ControladorVentanaMensaje;
 
-import Modelo.Usuario;
-
 import Ventanas.VentanaMensaje;
 
 public class Main {
