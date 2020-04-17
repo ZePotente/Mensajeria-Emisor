@@ -46,6 +46,7 @@ public class VentanaMensaje extends JFrame implements InterfazVistaMensaje {
     private JTextField asuntoTextField = new JTextField();
     private JList listaDestinatarios = new JList();
     private JComboBox listaTiposDeMensajes = new JComboBox(tiposDeMensaje);
+    private JButton botonActualizar = new JButton("Actualizar");
     
     public VentanaMensaje(String args0) {
         super(args0);
@@ -63,6 +64,7 @@ public class VentanaMensaje extends JFrame implements InterfazVistaMensaje {
         
         // Seteo accion a los botones
         botonEnviar.setActionCommand("EnviarClickeado");
+        botonActualizar.setActionCommand("ActualizarClickeado");
         
         // Agrego los paneles al contenedor principal
         contenedorPrincipal.add(panelSuperior, BorderLayout.CENTER);
@@ -129,21 +131,24 @@ public class VentanaMensaje extends JFrame implements InterfazVistaMensaje {
         listaDestinatarios.setCellRenderer(getRenderer());
         
         // Seteo el modelo de la JList destinatarios
+        
         listaDestinatarios.setModel(listaDestinatariosModelo);
         JScrollPane scrollListaDestinatarios = new JScrollPane(listaDestinatarios);
         scrollListaDestinatarios.setBorder(BorderFactory.createLineBorder(Color.gray));
         panelDestinatarios.add(destinatariosLabel, BorderLayout.NORTH);
         panelDestinatarios.add(scrollListaDestinatarios);
+        panelDestinatarios.add(botonActualizar, BorderLayout.SOUTH);
         
         // Agrego los componentes al panel superior
-        panelSuperior.add(panelMensaje);
         panelSuperior.add(panelDestinatarios);
+        panelSuperior.add(panelMensaje);
         
     }
 
     public void setControlador(ActionListener controlador) {
         this.controlador = (ControladorVentanaMensaje) controlador;
         botonEnviar.addActionListener(controlador);
+        botonActualizar.addActionListener(controlador);
     }
 
     public void abrir() {

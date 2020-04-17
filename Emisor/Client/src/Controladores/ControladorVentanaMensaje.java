@@ -14,6 +14,8 @@ import Vista.InterfazVistaMensaje;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import java.io.IOException;
+
 import java.net.InetAddress;
 
 import java.net.UnknownHostException;
@@ -54,6 +56,12 @@ public class ControladorVentanaMensaje implements ActionListener, Observer {
             ArrayList<Usuario> destinatarios = vista.getDestinatarios();
             if (verificarCamposCorrectos(asunto, descripcion, destinatarios)) {
                 enviarMensaje(asunto,descripcion,destinatarios);
+            }
+        } else if (evento.getActionCommand().equals(InterfazVistaMensaje.ACTUALIZAR)) {
+            try {
+                sistema.requestDestinatarios(InetAddress.getLocalHost().getHostAddress());
+            } catch (IOException e) {
+                vista.mostrarMensajeError(e.getMessage());
             }
         }
     }

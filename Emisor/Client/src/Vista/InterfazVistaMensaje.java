@@ -9,6 +9,7 @@ public interface InterfazVistaMensaje extends InterfazVista {
     static final String MENSAJESIMPLE = "Simple";
     static final String MENSAJEALARMA = "Alarma";
     static final String MENSAJERECEPCION = "Recepcion";
+    static final String ACTUALIZAR = "ActualizarClickeado";
     
     public String getAsunto();
     public String getDescripcion();
