@@ -40,6 +40,10 @@ public class Sistema extends Observable implements Observer {
         internetManager.enviarMensaje(mensaje.getDestinatario().getNombre(),
                                                 mensaje.getDestinatario().getNumeroDeIP(), NRO_PUERTO_RECEPTOR, mensajeString);
     }
+    
+    public void requestDestinatarios(String nroIP) throws IOException  {
+        internetManager.requestDestinatarios(nroIP, NRO_PUERTO_RECEPTOR);
+    }
 
     public ArrayList<Usuario> getDestinatarios() {
         ArrayList<Usuario> aux = null;

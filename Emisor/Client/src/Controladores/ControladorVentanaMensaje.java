@@ -40,6 +40,7 @@ public class ControladorVentanaMensaje implements ActionListener, Observer {
         String ip;
         try {
             ip = InetAddress.getLocalHost().getHostAddress();
+            System.out.println(ip);
             emisor = new Usuario("Emisor", ip);
         } catch (UnknownHostException e) {
         }
