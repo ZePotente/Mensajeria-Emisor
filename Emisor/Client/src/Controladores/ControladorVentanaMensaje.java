@@ -59,8 +59,8 @@ public class ControladorVentanaMensaje implements ActionListener, Observer {
             }
         } else if (evento.getActionCommand().equals(InterfazVistaMensaje.ACTUALIZAR)) {
             try {
-                sistema.requestDestinatarios(InetAddress.getLocalHost().getHostAddress());
-            } catch (IOException e) {
+                sistema.requestDestinatarios();
+            } catch (IOException e) { // no deberia ser el controlador el que capture la excepcion
                 vista.mostrarMensajeError(e.getMessage());
             }
         }

@@ -14,6 +14,7 @@ public class Sistema extends Observable implements Observer {
     // clase
     private static Sistema instancia;
     private static final int NRO_PUERTO_RECEPTOR = 123, NRO_PUERTO_DIRECTORIO = 100;
+    private static final String NRO_IP_DIRECTORIO = "192.168.0.195";//leer desde archivo de configuracion
     // instancia
     private Agenda agenda;
     private InternetManager internetManager;
@@ -41,8 +42,17 @@ public class Sistema extends Observable implements Observer {
                                                 mensaje.getDestinatario().getNumeroDeIP(), NRO_PUERTO_RECEPTOR, mensajeString);
     }
     
-    public void requestDestinatarios(String nroIP) throws IOException  {
-        internetManager.requestDestinatarios(nroIP, NRO_PUERTO_RECEPTOR);
+    public void requestDestinatarios() throws IOException {
+        String lista = null;
+        try {
+            lista = internetManager.requestDestinatarios(NRO_IP_DIRECTORIO, NRO_PUERTO_DIRECTORIO);
+            System.out.println("La lista es la siguiente: " + lista);
+            // llamar al que la rearme y que se actualice
+        } catch (IOException e) {
+            System.out.println("Hubo un error al actualizar");
+            throw new IOException(e); //porque la captura el controlador, que no deberia
+            // TODO Informar un error al actualizar
+        }
     }
 
     public ArrayList<Usuario> getDestinatarios() {
