@@ -34,11 +34,11 @@ public class InternetManager extends Observable {
         }
     }
     
-    public String requestDestinatarios(String nroIP, int nroPuerto) throws IOException {
-        Socket socket = new Socket(nroIP.trim(), nroPuerto);
+    public String requestDestinatarios(String nroIPDirectorio, int nroPuerto) throws IOException {
+        Socket socket = new Socket(nroIPDirectorio.trim(), nroPuerto);
         PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
         BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-        out.println("RequestReceptores\n"+nroIP.trim());
+        out.println("RequestReceptores\n");
         String lista = in.readLine();
         return lista;
     }
