@@ -41,8 +41,15 @@ public class Sistema extends Observable implements Observer {
                                                 mensaje.getDestinatario().getNumeroDeIP(), NRO_PUERTO_RECEPTOR, mensajeString);
     }
     
-    public void requestDestinatarios(String nroIP) throws IOException  {
-        internetManager.requestDestinatarios(nroIP, NRO_PUERTO_RECEPTOR);
+    public void requestDestinatarios(String nroIP) {
+        String lista = null;
+        try {
+            lista = internetManager.requestDestinatarios(nroIP, NRO_PUERTO_RECEPTOR);
+            System.out.println(lista);
+        } catch (IOException e) {
+            System.out.println("Hubo un error al actualizar");
+            // TODO Informar un error al actualizar
+        }
     }
 
     public ArrayList<Usuario> getDestinatarios() {
