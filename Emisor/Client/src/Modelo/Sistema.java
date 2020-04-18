@@ -2,6 +2,10 @@ package Modelo;
 
 import Modelo.Mensaje.Mensaje;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 
 import java.net.UnknownHostException;
@@ -9,12 +13,14 @@ import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.Scanner;
 
 public class Sistema extends Observable implements Observer {
     // clase
     private static Sistema instancia;
     private static final int NRO_PUERTO_RECEPTOR = 123, NRO_PUERTO_DIRECTORIO = 100;
-    private static final String NRO_IP_DIRECTORIO = "192.168.0.195";//leer desde archivo de configuracion
+    private static final String ARCHIVO_CONFIG = "configuracion.txt";
+    private String NRO_IP_DIRECTORIO = "";
     // instancia
     private Agenda agenda;
     private InternetManager internetManager;
@@ -22,6 +28,13 @@ public class Sistema extends Observable implements Observer {
     private Sistema() {
         agenda = new Agenda();
         internetManager = new InternetManager();
+        /* //colocar donde corresponda
+        try {
+            leerConfig(ARCHIVO_CONFIG);
+        } catch (FileNotFoundException e) {
+            System.out.println("No se pudo leer.");
+        }
+        */
     }
     
     
@@ -81,6 +94,15 @@ public class Sistema extends Observable implements Observer {
     public void update(Observable observable, Object object) {
         setChanged();
         notifyObservers(object);
+    }
+    
+    private void leerConfig(String nombreArch) throws FileNotFoundException {
+        FileInputStream arch = new FileInputStream(Sistema.ARCHIVO_CONFIG);       
+        Scanner sc = new Scanner(arch);    
+        
+        this.NRO_IP_DIRECTORIO = sc.nextLine(); 
+        System.out.println(this.NRO_IP_DIRECTORIO);
+        sc.close();
     }
 }
 
