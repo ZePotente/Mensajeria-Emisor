@@ -38,8 +38,11 @@ public class InternetManager extends Observable {
         Socket socket = new Socket(nroIPDirectorio.trim(), nroPuerto);
         PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
         BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-        out.println("RequestReceptores\n");
+        out.println("RequestReceptores");
+        
+        // leida de la lista de receptores online
         String lista = in.readLine();
+        socket.close(); // in.close(); out.close();
         return lista;
     }
 }

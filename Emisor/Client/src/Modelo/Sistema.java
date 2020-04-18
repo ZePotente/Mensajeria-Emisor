@@ -46,7 +46,7 @@ public class Sistema extends Observable implements Observer {
         String lista = null;
         try {
             lista = internetManager.requestDestinatarios(NRO_IP_DIRECTORIO, NRO_PUERTO_DIRECTORIO);
-            System.out.println(lista);
+            System.out.println("La lista es la siguiente: " + lista);
         } catch (IOException e) {
             System.out.println("Hubo un error al actualizar");
             throw new IOException(e); //porque
