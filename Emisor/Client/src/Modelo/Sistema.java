@@ -24,6 +24,7 @@ public class Sistema extends Observable implements Observer {
     // instancia
     private Agenda agenda;
     private InternetManager internetManager;
+    private Usuario emisor;
 
     private Sistema() {
         agenda = new Agenda();
@@ -38,8 +39,13 @@ public class Sistema extends Observable implements Observer {
     }
     
     
-    public void ingresarComoEmisor() {
+    public void ingresarComoEmisor(Usuario usuario) {
+        emisor = usuario;
         internetManager.addObserver(this);
+    }
+    
+    public Usuario getEmisor() {
+        return emisor;
     }
     
     public static Sistema getInstancia() {
