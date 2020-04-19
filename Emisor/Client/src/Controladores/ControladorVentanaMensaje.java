@@ -46,7 +46,7 @@ public class ControladorVentanaMensaje implements ActionListener, Observer {
             }
         } else if (evento.getActionCommand().equals(InterfazVistaMensaje.ACTUALIZAR)) {
             try {
-                sistema.requestDestinatarios();
+                ArrayList<Usuario> destinatarios = sistema.requestDestinatarios();
             } catch (IOException e) { 
                 vista.mostrarMensajeError("Se produjo un error al actualizar la lista de destinatarios, compruebe su conexion al Directorio o la direccion IP en el archivo de configuracion.");
             }
