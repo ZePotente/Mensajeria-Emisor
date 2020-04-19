@@ -27,25 +27,12 @@ import java.util.Observer;
 public class ControladorVentanaMensaje implements ActionListener, Observer {
     private InterfazVistaMensaje vista;
     private Sistema sistema;
-    private Usuario emisor;
 
     public ControladorVentanaMensaje(InterfazVistaMensaje vista) {
         this.vista = vista;
         this.sistema = Sistema.getInstancia();
-        this.sistema.ingresarComoEmisor();
         sistema.addObserver(this);
-        setEmisorIP();
         
-    }
-    
-    private void setEmisorIP() {
-        String ip;
-        try {
-            ip = InetAddress.getLocalHost().getHostAddress();
-            System.out.println(ip);
-            emisor = new Usuario("Emisor", ip);
-        } catch (UnknownHostException e) {
-        }
     }
 
     @Override
@@ -85,7 +72,7 @@ public class ControladorVentanaMensaje implements ActionListener, Observer {
         for (Usuario destinatario: destinatarios) {
             Mensaje mensaje;
             mensaje = crearMensaje(asunto, cuerpo, destinatario);
-            if (mensaje != null && emisor != null) {
+            if (mensaje != null) {
                 try {
                     sistema.enviarMensaje(mensaje);
                 } catch (Exception e) {
@@ -98,6 +85,7 @@ public class ControladorVentanaMensaje implements ActionListener, Observer {
     }
     
     private Mensaje crearMensaje(String asunto, String cuerpo, Usuario destinatario) {
+        Usuario emisor = sistema.getEmisor();
         switch (vista.getTipoDeMensaje()) {
         case InterfazVistaMensaje.MENSAJESIMPLE:
             return new MensajeSimple(asunto, cuerpo, destinatario, emisor);
