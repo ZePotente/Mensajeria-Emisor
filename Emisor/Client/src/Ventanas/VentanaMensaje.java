@@ -197,6 +197,15 @@ public class VentanaMensaje extends JFrame implements InterfazVistaMensaje {
         }
     }
     
+    public void actualizarListaDestinatarios(ArrayList<Usuario> destinatarios) {
+        listaDestinatariosModelo.removeAllElements();
+        if (destinatarios != null) {
+            for (Usuario destinatario: destinatarios) {
+                listaDestinatariosModelo.addElement(destinatario);
+            }
+        }
+    }
+    
     public void mostrarMensajeError(String mensaje) {
         JOptionPane.showMessageDialog(null, mensaje);
     }

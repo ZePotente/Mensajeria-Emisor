@@ -29,7 +29,7 @@ public class Agenda {
     /**
      * @param lista
      */
-    public void actualizarDestinatarios(String lista) {
+    public ArrayList<Usuario> actualizarDestinatarios(String lista) {
         ArrayList<Usuario> aux = new ArrayList<Usuario>();
         ArrayList<String[]> listaString = RearmadorLista.obtenerDestinatarios(lista);
         
@@ -37,5 +37,6 @@ public class Agenda {
             aux.add(new Usuario(arrString[0], arrString[1]));
         }
         destinatarios = aux;
+        return destinatarios;
     }
 }

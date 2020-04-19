@@ -61,12 +61,12 @@ public class Sistema extends Observable implements Observer {
                                                 mensaje.getDestinatario().getNumeroDeIP(), NRO_PUERTO_RECEPTOR, mensajeString);
     }
     
-    public void requestDestinatarios() throws IOException {
+    public ArrayList<Usuario> requestDestinatarios() throws IOException {
         String lista = null;
         try {
             lista = internetManager.requestDestinatarios(NRO_IP_DIRECTORIO, NRO_PUERTO_DIRECTORIO);
-            agenda.actualizarDestinatarios(lista);
-            System.out.println("La lista es la siguiente: " + lista);
+            ArrayList<Usuario> destinatarios = agenda.actualizarDestinatarios(lista);
+            return destinatarios;
             // llamar al que la rearme y que se actualice
         } catch (IOException e) {
             System.out.println("Hubo un error al actualizar");
