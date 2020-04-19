@@ -190,8 +190,10 @@ public class VentanaMensaje extends JFrame implements InterfazVistaMensaje {
     
     private void cargarDestinatariosPosibles() {
         ArrayList<Usuario> usuarios = controlador.getDestinatarios();
-        for (Usuario usuario : usuarios) {
-            listaDestinatariosModelo.addElement(usuario);
+        if (usuarios != null) {
+            for (Usuario usuario : usuarios) {
+                listaDestinatariosModelo.addElement(usuario);
+            }
         }
     }
     
