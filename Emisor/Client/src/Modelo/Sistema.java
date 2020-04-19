@@ -20,8 +20,8 @@ public class Sistema extends Observable implements Observer {
     private static Sistema instancia;
     private static final int NRO_PUERTO_RECEPTOR = 123, NRO_PUERTO_DIRECTORIO = 100;
     private static final String ARCHIVO_CONFIG = "configuracion.txt";
-    private String NRO_IP_DIRECTORIO = "";
     // instancia
+    private String NRO_IP_DIRECTORIO = "";
     private Agenda agenda;
     private InternetManager internetManager;
     private Usuario emisor;
@@ -65,6 +65,7 @@ public class Sistema extends Observable implements Observer {
         String lista = null;
         try {
             lista = internetManager.requestDestinatarios(NRO_IP_DIRECTORIO, NRO_PUERTO_DIRECTORIO);
+            agenda.actualizarDestinatarios(lista);
             System.out.println("La lista es la siguiente: " + lista);
             // llamar al que la rearme y que se actualice
         } catch (IOException e) {
@@ -73,16 +74,20 @@ public class Sistema extends Observable implements Observer {
             // TODO Informar un error al actualizar
         }
     }
-
+    /* //es el getDestinatariosViejo
     public ArrayList<Usuario> getDestinatarios() {
         ArrayList<Usuario> aux = null;
         try {
-            aux = agenda.getDestinatarios();
+            aux = agenda.getDestinatariosArchivo();
         } catch (IOException e) {
             // error en la lectura del archivo de destinatarioss
             // sin funcionalidad
         }
         return aux;
+    }
+    */
+    public ArrayList<Usuario> getDestinatarios() {
+        return agenda.getDestinatarios();
     }
     
     // los tres metodos que siguen son para manejo de recepcion de mensajes en el IMR
