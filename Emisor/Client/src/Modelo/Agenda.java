@@ -20,7 +20,7 @@ public class Agenda {
      * Metodo que devuelve un arraylist de los usuarios que haya conectados al momento de llamarlo.<br>
      * @return
      * ArrayList de usuarios si hay receptores en la lista.<br>
-     * <i>null<i> si no los hay.
+     * ArrayList con size() == 0 si no hay receptores en la lista.
      */
     public ArrayList<Usuario> getDestinatarios() {
         return destinatarios;
@@ -31,11 +31,10 @@ public class Agenda {
      */
     public ArrayList<Usuario> actualizarDestinatarios(String lista) {
         ArrayList<Usuario> aux = new ArrayList<Usuario>();
-        ArrayList<String[]> listaString = RearmadorLista.obtenerDestinatarios(lista);
-        
-        for (String[] arrString : listaString) {
-            aux.add(new Usuario(arrString[0], arrString[1]));
-        }
+        ArrayList<String[]> listaString = RearmadorLista.obtenerDestinatarios(lista);     
+            for (String[] arrString : listaString) {
+                aux.add(new Usuario(arrString[0], arrString[1]));
+            }
         destinatarios = aux;
         return destinatarios;
     }
