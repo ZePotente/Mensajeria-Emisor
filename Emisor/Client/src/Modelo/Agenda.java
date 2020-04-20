@@ -32,9 +32,11 @@ public class Agenda {
     public ArrayList<Usuario> actualizarDestinatarios(String lista) {
         ArrayList<Usuario> aux = new ArrayList<Usuario>();
         ArrayList<String[]> listaString = RearmadorLista.obtenerDestinatarios(lista);     
-            for (String[] arrString : listaString) {
-                aux.add(new Usuario(arrString[0], arrString[1]));
-            }
+        for (String[] arrString : listaString) {
+            Usuario usuario = new Usuario(arrString[0], arrString[1]);
+            usuario.setEstado(arrString[2].equalsIgnoreCase("true"));
+            aux.add(usuario);
+        }
         destinatarios = aux;
         return destinatarios;
     }

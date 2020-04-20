@@ -1,5 +1,7 @@
 package Controladores;
 
+import Excepciones.NoConexionException;
+
 import Modelo.Mensaje.Mensaje;
 
 import Modelo.Mensaje.MensajeAlarma;
@@ -38,17 +40,29 @@ public class ControladorVentanaMensaje implements ActionListener, Observer {
     @Override
     public void actionPerformed(ActionEvent evento) {
         if (evento.getActionCommand().equals(InterfazVistaMensaje.ENVIAR)) {
+            boolean usuarioOffline = false;
             String asunto = vista.getAsunto();
             String descripcion = vista.getDescripcion();
             ArrayList<Usuario> destinatarios = vista.getDestinatarios();
-            if (verificarCamposCorrectos(asunto, descripcion, destinatarios)) {
-                enviarMensaje(asunto,descripcion,destinatarios);
+            for (Usuario destinatario: destinatarios) {
+                if (!destinatario.getEstado()) {
+                    usuarioOffline = true;
+                    break;
+                }
             }
+            if (usuarioOffline) {
+                vista.mostrarMensajeError("Alguno de los usuarios seleccionados esta offline. Por favor solo seleccione usuarios online.");
+            } else {
+                if (verificarCamposCorrectos(asunto, descripcion, destinatarios)) {
+                    enviarMensaje(asunto,descripcion,destinatarios);
+                }
+            }
+            
         } else if (evento.getActionCommand().equals(InterfazVistaMensaje.ACTUALIZAR)) {
             try {
                 ArrayList<Usuario> destinatarios = sistema.requestDestinatarios();
-            } catch (IOException e) { 
-                vista.mostrarMensajeError("Se produjo un error al actualizar la lista de destinatarios, compruebe su conexion al Directorio o la direccion IP en el archivo de configuracion.");
+            } catch (NoConexionException e) {
+                vista.mostrarMensajeError("Error al conectar con el directorio");
             }
         }
     }
