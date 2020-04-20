@@ -31,14 +31,19 @@ public class Mensaje implements ArmableDesarmable {
                emisor.toString();
     }
     
+    @Override
     public String desarmar() {
-        return this.toString();
+        return asunto + ArmableDesarmable.SEPARADOR +
+               descripcion + ArmableDesarmable.SEPARADOR +
+               destinatario.desarmar() + ArmableDesarmable.SEPARADOR +
+               emisor.desarmar(); 
     }
     
     public Usuario getDestinatario() {
         return this.destinatario;
     }
     
+    /*
     public static Mensaje armar(String tipoYMsg) throws MalTipoDeMensajeException, MensajeMalFormadoException {
         Mensaje mensaje;
         String tipo, msg;
@@ -61,8 +66,8 @@ public class Mensaje implements ArmableDesarmable {
         }
         return mensaje;
     }
-
-
+    */
+    
     public String getAsunto() {
         return asunto;
     }
