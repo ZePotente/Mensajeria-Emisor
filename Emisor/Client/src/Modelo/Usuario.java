@@ -37,7 +37,9 @@ public class Usuario implements ArmableDesarmable {
         return nombre + "-" + estado;
     }
     
+    @Override
     public String desarmar() {
-        
+        return nombre + ArmableDesarmable.SEPARADOR + 
+               numeroDeIP;
     }
 }
