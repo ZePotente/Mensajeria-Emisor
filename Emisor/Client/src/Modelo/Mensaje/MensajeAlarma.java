@@ -17,6 +17,7 @@ public class MensajeAlarma extends Mensaje {
                super.toString();
     }
     
+    /*
     public static MensajeAlarma armar(String msg) throws MensajeMalFormadoException {  
         String[] aux = msg.split(SEPARADOR); // se usa split aca y en el super() lo que es ineficiente
         if (aux.length != 6) // se deberia cambiar el 6 por algo mas dinamico
@@ -26,4 +27,5 @@ public class MensajeAlarma extends Mensaje {
         // si la unica manera es enviando Strings, se va a implementar
         return new MensajeAlarma(aux[0], aux[1], new Usuario(aux[2], aux[3]), new Usuario(aux[4], aux[5]));
     }
+    */
 }

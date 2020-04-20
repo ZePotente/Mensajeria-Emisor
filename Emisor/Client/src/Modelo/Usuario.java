@@ -34,8 +34,12 @@ public class Usuario implements ArmableDesarmable {
         } else {
             estado = "Offline";
         }
+        return nombre + "-" + estado;
+    }
+    
+    @Override
+    public String desarmar() {
         return nombre + ArmableDesarmable.SEPARADOR + 
-               numeroDeIP + ArmableDesarmable.SEPARADOR +
-               estado;
+               numeroDeIP;
     }
 }
