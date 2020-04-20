@@ -32,7 +32,10 @@ public class Mensaje implements ArmableDesarmable {
     }
     
     public String desarmar() {
-        return this.toString();
+        return asunto + ArmableDesarmable.SEPARADOR +
+               descripcion + ArmableDesarmable.SEPARADOR +
+               destinatario.toString() + ArmableDesarmable.SEPARADOR +
+               emisor.desarmar(); 
     }
     
     public Usuario getDestinatario() {
