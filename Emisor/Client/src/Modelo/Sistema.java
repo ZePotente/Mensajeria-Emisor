@@ -1,11 +1,12 @@
 package Modelo;
 
+import Excepciones.NoConexionException;
+import Excepciones.NoLecturaConfiguracionException;
+
 import Modelo.Mensaje.Mensaje;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 
 import java.net.UnknownHostException;
@@ -29,13 +30,6 @@ public class Sistema extends Observable implements Observer {
     private Sistema() {
         agenda = new Agenda();
         internetManager = new InternetManager();
-        /* //colocar donde corresponda
-        try {
-            leerConfig(ARCHIVO_CONFIG);
-        } catch (FileNotFoundException e) {
-            System.out.println("No se pudo leer.");
-        }
-        */
     }
     
     
@@ -61,17 +55,15 @@ public class Sistema extends Observable implements Observer {
                                                 mensaje.getDestinatario().getNumeroDeIP(), NRO_PUERTO_RECEPTOR, mensajeString);
     }
     
-    public ArrayList<Usuario> requestDestinatarios() throws IOException {
-        String lista = null;
+    public ArrayList<Usuario> requestDestinatarios() throws NoConexionException {
         try {
-            lista = internetManager.requestDestinatarios(NRO_IP_DIRECTORIO, NRO_PUERTO_DIRECTORIO);
+            String lista = lista = internetManager.requestDestinatarios(NRO_IP_DIRECTORIO, NRO_PUERTO_DIRECTORIO);
             ArrayList<Usuario> destinatarios = agenda.actualizarDestinatarios(lista);
             return destinatarios;
             // llamar al que la rearme y que se actualice
         } catch (IOException e) {
             System.out.println("Hubo un error al actualizar");
-            throw new IOException(e); //porque la captura el controlador, que no deberia
-            // TODO Informar un error al actualizar
+            throw new NoConexionException(e); //porque la captura el controlador, que no deberia
         }
     }
     /* //es el getDestinatariosViejo
@@ -106,14 +98,28 @@ public class Sistema extends Observable implements Observer {
         setChanged();
         notifyObservers(object);
     }
-    
-    private void leerConfig(String nombreArch) throws FileNotFoundException {
-        FileInputStream arch = new FileInputStream(Sistema.ARCHIVO_CONFIG);       
-        Scanner sc = new Scanner(arch);    
-        
-        this.NRO_IP_DIRECTORIO = sc.nextLine(); 
-        System.out.println(this.NRO_IP_DIRECTORIO);
-        sc.close();
+
+    /**
+     * @param nombreArch
+     * Lee el archivo de configuracion.txt
+     * y asigna la IP leida a la variable local que la contiene.
+     * 
+     * @throws FileNotFoundException
+     * Si ocurre un error con la lectura del archivo de configuracion.
+     */
+    //llamarlo como leerConfig(Sistema.ARCHIVO_CONFIG)
+    private void leerConfig(String nombreArch) throws NoLecturaConfiguracionException {
+        try {
+            FileInputStream arch;
+            arch = new FileInputStream(nombreArch);
+            Scanner sc = new Scanner(arch);    
+            
+            this.NRO_IP_DIRECTORIO = sc.nextLine(); 
+            System.out.println("IP-Directorio leida: " + this.NRO_IP_DIRECTORIO);
+            sc.close();
+        } catch (FileNotFoundException e) {
+            throw new NoLecturaConfiguracionException(e);
+        }  
     }
 }
 
