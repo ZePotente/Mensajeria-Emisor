@@ -31,6 +31,7 @@ public class ControladorVentanaIngresaNombre implements ActionListener {
             ventana.setControlador(controlador);
             try {
                 String nroIP = InetAddress.getLocalHost().getHostAddress();
+                System.out.println(nroIP);
                 sistema.ingresarComoEmisor(new Usuario(vista.getNombre(), nroIP));
                 ventana.abrir();
                 vista.cerrar();

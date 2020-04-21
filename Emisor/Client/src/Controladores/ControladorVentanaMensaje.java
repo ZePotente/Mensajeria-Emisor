@@ -34,7 +34,6 @@ public class ControladorVentanaMensaje implements ActionListener, Observer {
         this.vista = vista;
         this.sistema = Sistema.getInstancia();
         sistema.addObserver(this);
-        
     }
 
     @Override
@@ -59,11 +58,16 @@ public class ControladorVentanaMensaje implements ActionListener, Observer {
             }
             
         } else if (evento.getActionCommand().equals(InterfazVistaMensaje.ACTUALIZAR)) {
-            try {
-                ArrayList<Usuario> destinatarios = sistema.requestDestinatarios();
-            } catch (NoConexionException e) {
-                vista.mostrarMensajeError("Error al conectar con el directorio");
-            }
+            actualizarlistaDestinatarios();
+        }
+    }
+    
+    public void actualizarlistaDestinatarios() {
+        try {
+            ArrayList<Usuario> destinatarios = sistema.requestDestinatarios();
+            vista.actualizarListaDestinatarios(destinatarios);
+        } catch (NoConexionException e) {
+            vista.mostrarMensajeError("Error al conectar con el directorio");
         }
     }
     
