@@ -62,7 +62,6 @@ public class Sistema extends Observable implements Observer {
             return destinatarios;
             // llamar al que la rearme y que se actualice
         } catch (IOException e) {
-            System.out.println("Hubo un error al actualizar");
             throw new NoConexionException(e); //porque la captura el controlador, que no deberia
         }
     }
@@ -115,7 +114,6 @@ public class Sistema extends Observable implements Observer {
             Scanner sc = new Scanner(arch);    
             
             this.NRO_IP_DIRECTORIO = sc.nextLine(); 
-            System.out.println("IP-Directorio leida: " + this.NRO_IP_DIRECTORIO);
             sc.close();
         } catch (FileNotFoundException e) {
             throw new NoLecturaConfiguracionException(e);
