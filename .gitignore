@@ -1,2 +1,4 @@
 #ignorar la carpeta .data para evitar quilombos
 Emisor/.data
+Emisor/Client/model
+Emisor/Client/deploy
