@@ -19,7 +19,7 @@ import java.util.Scanner;
 public class Sistema extends Observable implements Observer {
     // clase
     private static Sistema instancia;
-    private static final int NRO_PUERTO_RECEPTOR = 123, NRO_PUERTO_DIRECTORIO = 100;
+    private static final int NRO_PUERTO_SERVIDORMENSAJES = 200, NRO_PUERTO_DIRECTORIO = 100;
     private static final String ARCHIVO_CONFIG = "configuracion.txt";
     // instancia
     private String NRO_IP_DIRECTORIO = "";
@@ -52,7 +52,7 @@ public class Sistema extends Observable implements Observer {
     public void enviarMensaje(Mensaje mensaje) throws UnknownHostException, IOException {
         String mensajeString = mensaje.desarmar();
         internetManager.enviarMensaje(mensaje.getDestinatario().getNombre(),
-                                                mensaje.getDestinatario().getNumeroDeIP(), NRO_PUERTO_RECEPTOR, mensajeString);
+                                                mensaje.getDestinatario().getNumeroDeIP(), NRO_PUERTO_SERVIDORMENSAJES, mensajeString);
     }
     
     public ArrayList<Usuario> requestDestinatarios() throws NoConexionException {
@@ -65,18 +65,7 @@ public class Sistema extends Observable implements Observer {
             throw new NoConexionException(e); //porque la captura el controlador, que no deberia
         }
     }
-    /* //es el getDestinatariosViejo
-    public ArrayList<Usuario> getDestinatarios() {
-        ArrayList<Usuario> aux = null;
-        try {
-            aux = agenda.getDestinatariosArchivo();
-        } catch (IOException e) {
-            // error en la lectura del archivo de destinatarioss
-            // sin funcionalidad
-        }
-        return aux;
-    }
-    */
+    
     public ArrayList<Usuario> getDestinatarios() {
         return agenda.getDestinatarios();
     }
