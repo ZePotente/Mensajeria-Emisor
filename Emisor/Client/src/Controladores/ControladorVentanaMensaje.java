@@ -8,6 +8,7 @@ import Modelo.Mensaje.MensajeAlarma;
 import Modelo.Mensaje.MensajeRecepcion;
 import Modelo.Mensaje.MensajeSimple;
 
+import Modelo.MensajesFactory;
 import Modelo.Sistema;
 import Modelo.Usuario;
 
@@ -29,6 +30,7 @@ import java.util.Observer;
 public class ControladorVentanaMensaje implements ActionListener, Observer {
     private InterfazVistaMensaje vista;
     private Sistema sistema;
+    private MensajesFactory factoryMensajes = new MensajesFactory();
 
     public ControladorVentanaMensaje(InterfazVistaMensaje vista) {
         this.vista = vista;
@@ -39,24 +41,12 @@ public class ControladorVentanaMensaje implements ActionListener, Observer {
     @Override
     public void actionPerformed(ActionEvent evento) {
         if (evento.getActionCommand().equals(InterfazVistaMensaje.ENVIAR)) {
-            boolean usuarioOffline = false;
             String asunto = vista.getAsunto();
             String descripcion = vista.getDescripcion();
             ArrayList<Usuario> destinatarios = vista.getDestinatarios();
-            for (Usuario destinatario: destinatarios) {
-                if (!destinatario.getEstado()) {
-                    usuarioOffline = true;
-                    break;
-                }
+            if (verificarCamposCorrectos(asunto, descripcion, destinatarios)) {
+                enviarMensaje(asunto,descripcion,destinatarios);
             }
-            if (usuarioOffline) {
-                vista.mostrarMensajeError("Alguno de los usuarios seleccionados esta offline. Por favor solo seleccione usuarios online.");
-            } else {
-                if (verificarCamposCorrectos(asunto, descripcion, destinatarios)) {
-                    enviarMensaje(asunto,descripcion,destinatarios);
-                }
-            }
-            
         } else if (evento.getActionCommand().equals(InterfazVistaMensaje.ACTUALIZAR)) {
             actualizarlistaDestinatarios();
         }
@@ -104,15 +94,7 @@ public class ControladorVentanaMensaje implements ActionListener, Observer {
     
     private Mensaje crearMensaje(String asunto, String cuerpo, Usuario destinatario) {
         Usuario emisor = sistema.getEmisor();
-        switch (vista.getTipoDeMensaje()) {
-        case InterfazVistaMensaje.MENSAJESIMPLE:
-            return new MensajeSimple(asunto, cuerpo, destinatario, emisor);
-        case InterfazVistaMensaje.MENSAJEALARMA:
-            return new MensajeAlarma(asunto, cuerpo, destinatario, emisor);
-        case InterfazVistaMensaje.MENSAJERECEPCION:
-            return new MensajeRecepcion(asunto, cuerpo, destinatario, emisor);
-        }
-        return null;
+        return factoryMensajes.crearMensaje(vista.getTipoDeMensaje(), asunto, cuerpo, destinatario, emisor);
     }
     
     public ArrayList<Usuario> getDestinatarios() {
