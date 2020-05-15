@@ -15,8 +15,9 @@ import java.net.UnknownHostException;
 import java.util.Observable;
 
 public class InternetManager extends Observable {
+    private ServerRecepcion recepcion;
     public InternetManager() {
-        super();
+        recepcion = new ServerRecepcion().start();
     }
     
     public void enviarMensaje(String nombreDestinatario, String nroIP, int nroPuerto, String msg) throws UnknownHostException, IOException {
@@ -25,13 +26,14 @@ public class InternetManager extends Observable {
         BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         out.println(nombreDestinatario+"\n"+nroIP+"\n"+msg);
         
-        out.close();
         socket.close();
         
+        /*
         if (msg.split(Mensaje.SEPARADOR)[0].equals(Mensaje.MENSAJE_RECEPCION)) {
             setChanged();
             notifyObservers(nombreDestinatario);
         }
+        */
     }
     
     public String requestDestinatarios(String nroIPDirectorio, int nroPuerto) throws IOException {
@@ -42,7 +44,7 @@ public class InternetManager extends Observable {
         
         // leida de la lista de receptores online
         String lista = in.readLine();
-        socket.close(); // in.close(); out.close();
+        socket.close();
         return lista;
     }
 }
