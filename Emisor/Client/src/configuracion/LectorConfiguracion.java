@@ -23,7 +23,8 @@ public class LectorConfiguracion {
             Scanner sc = new Scanner(arch);    
             
             String nroIPDirectorio = sc.nextLine(); 
-            Configuracion config = new Configuracion(nroIPDirectorio);
+            String nroIPSvMensajes = sc.nextLine();
+            Configuracion config = new Configuracion(nroIPDirectorio, nroIPSvMensajes);
             sc.close();
             return config;
         } catch (FileNotFoundException e) {
