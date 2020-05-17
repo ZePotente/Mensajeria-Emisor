@@ -1,30 +1,47 @@
 package Modelo;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+
+import java.io.InputStreamReader;
 
 import java.net.ServerSocket;
 import java.net.Socket;
 
-public class ServerRecepcion extends Thread {
+import java.util.Observable;
+
+public class ServerRecepcion extends Observable {
     private ServerSocket sv;
-    private static int port;
+    private int puerto;
     
-    public ServerRecepcion() throws IOException {
-        sv = new ServerSocket(ServerRecepcion.port);
+    public ServerRecepcion(int puerto) {
+        this.puerto = puerto;
     }
 
-
-    @Override
-    public void run() {
-        while (true) {
-            try(Socket socket = sv.accept();) {
-                setChanged();
-                notifyObservers(nombreDestinatario);
-            } catch (IOException e) {
-                //tampoco deberia ir aca.
-                System.out.println("Error al recibir una notificacion de recepcion.");
+    public void escucharNotificaciones() {   
+        new Thread() {
+            public void run() {
+                try {
+                sv = new ServerSocket(puerto);
+                while (true) {
+                    try (Socket socket = sv.accept();
+                         BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));) 
+                    {
+                        String nombreDestinatario = in.readLine();
+                        
+                        setChanged();
+                        notifyObservers(nombreDestinatario);
+                    } catch (IOException e) {
+                        //tampoco deberia ir aca.
+                        System.out.println("Error al recibir una notificacion de recepcion.");
+                    }
+        
+                }
+                } catch (IOException e) {
+                    // lastima
+                    System.out.println("Algo fallo en el server de notificacion de mensajes con recepcion.");
+                }
             }
-
-        }
+        }.start();
     }
 }
