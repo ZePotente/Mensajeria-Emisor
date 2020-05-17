@@ -12,44 +12,16 @@ import java.net.UnknownHostException;
 
 import java.util.Observable;
 
-public class InternetManager extends Observable {
-    private static final int PUERTO_NOTIFICACION_RECEPCION = 300;
-
+public class InternetManager {
     public InternetManager() {
-        escuchar(InternetManager.PUERTO_NOTIFICACION_RECEPCION);
+        
     }
     
-    public void escuchar(int puerto) {
-        new Thread() {
-            public void run() {
-                try {
-                ServerSocket sv = new ServerSocket(puerto);
-                while (true) {
-                    try(Socket socket = sv.accept();
-                        BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));) 
-                    {
-                            String nombreDestinatario = in.readLine();
-                            setChanged();
-                            notifyObservers(nombreDestinatario);
-                    } catch (IOException e) {
-                        //tampoco deberia ir aca.
-                        System.out.println("Error al recibir una notificacion de recepcion.");
-                    }
-    
-                }
-                } catch (Exception e) {
-                    // lastima
-                    System.out.println("Algo fallo en el server de notificacion de mensajes con recepcion.");
-                }
-            }
-        }.start();
-    }
-    
-    public void enviarMensaje(String nombreDestinatario, String nroIP, int nroPuerto, String msg) throws UnknownHostException, IOException {
-        Socket socket = new Socket(nroIP.trim(), nroPuerto);
+    public void enviarMensaje(String nombreDestinatario, String nroIPDestinatario, int nroPuerto, String msg) throws UnknownHostException, IOException {
+        Socket socket = new Socket(nroIPDestinatario.trim(), nroPuerto);
         PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
-        BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-        out.println(nombreDestinatario+"\n"+nroIP+"\n"+msg);
+        //BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+        out.println(nombreDestinatario+"\n"+nroIPDestinatario+"\n"+msg);
         
         socket.close();
         
