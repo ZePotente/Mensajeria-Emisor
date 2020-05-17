@@ -24,15 +24,14 @@ public class Sistema extends Observable implements Observer {
                              NRO_PUERTO_NOTIFICACION_RECEPCION = 300;
     private static final String ARCHIVO_CONFIG = "configuracion.txt";
     // instancia
-    private String NRO_IP_DIRECTORIO = "";
+    private Configuracion config;
     private Agenda agenda;
     private InternetManager internetManager;
     private ServerRecepcion sv;
     private Usuario emisor;
     
     private Sistema() throws NoLecturaConfiguracionException, IOException {
-        Configuracion config = LectorConfiguracion.leerConfig(Sistema.ARCHIVO_CONFIG);
-        this.NRO_IP_DIRECTORIO = config.getNroIPDirectorio();
+        config = LectorConfiguracion.leerConfig(Sistema.ARCHIVO_CONFIG);
         agenda = new Agenda();
         internetManager = new InternetManager();
         sv = new ServerRecepcion(Sistema.NRO_PUERTO_NOTIFICACION_RECEPCION);
@@ -71,8 +70,8 @@ public class Sistema extends Observable implements Observer {
     
     public ArrayList<Usuario> requestDestinatarios() throws NoConexionException {
         try {
-            System.out.println(this.NRO_IP_DIRECTORIO);
-            String lista = lista = internetManager.requestDestinatarios(NRO_IP_DIRECTORIO, NRO_PUERTO_DIRECTORIO);
+            System.out.println(this.config.getNroIPDirectorio());
+            String lista = lista = internetManager.requestDestinatarios(this.config.getNroIPDirectorio(), NRO_PUERTO_DIRECTORIO);
             ArrayList<Usuario> destinatarios = agenda.actualizarDestinatarios(lista);
             return destinatarios;
             // llamar al que la rearme y que se actualice
