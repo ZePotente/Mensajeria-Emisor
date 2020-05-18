@@ -1,5 +1,7 @@
 package Modelo;
 
+import Modelo.Mensaje.Mensaje;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -17,12 +19,15 @@ public class InternetManager {
         
     }
     
-    public void enviarMensaje(String nombreDestinatario, String nroIPDestinatario, int nroPuerto, String msg) throws UnknownHostException, IOException {
+    public void enviarMensaje(String nombreDestinatario, String nroIPDestinatario, String nroIPEmisor, int nroPuerto, String msg) throws UnknownHostException, IOException {
         Socket socket = new Socket(nroIPDestinatario.trim(), nroPuerto);
         PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
         //BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-        out.println(nombreDestinatario+"\n"+nroIPDestinatario+"\n"+msg);
-        
+        if (msg.split(Mensaje.SEPARADOR)[0].equals(Mensaje.MENSAJE_RECEPCION)) {
+            out.println(nombreDestinatario+"\n"+nroIPDestinatario+"\n"+nroIPEmisor+"\n"+msg);
+        } else {
+            out.println(nombreDestinatario+"\n"+nroIPDestinatario+"\n"+msg);
+        }
         socket.close();
         
         /*

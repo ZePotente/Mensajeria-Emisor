@@ -65,6 +65,7 @@ public class Sistema extends Observable implements Observer {
         String mensajeString = mensaje.desarmar();
         internetManager.enviarMensaje(mensaje.getDestinatario().getNombre(),
                                       mensaje.getDestinatario().getNumeroDeIP(),
+                                      emisor.getNumeroDeIP(),
                                       NRO_PUERTO_SERVIDORMENSAJES, mensajeString);
     }
     
