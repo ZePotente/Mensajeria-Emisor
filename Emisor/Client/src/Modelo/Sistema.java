@@ -35,12 +35,12 @@ public class Sistema extends Observable implements Observer {
         agenda = new Agenda();
         internetManager = new InternetManager();
         sv = new ServerRecepcion(Sistema.NRO_PUERTO_NOTIFICACION_RECEPCION);
+        sv.addObserver(this);
     }
     
     
     public void ingresarComoEmisor(Usuario usuario) {
         emisor = usuario;
-        sv.addObserver(this);
     }
     
     public Usuario getEmisor() {
