@@ -1,5 +1,7 @@
 package Modelo;
 
+import Modelo.Mensaje.Mensaje;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -17,20 +19,16 @@ public class InternetManager {
         
     }
     
-    public void enviarMensaje(String nombreDestinatario, String nroIPDestinatario, int nroPuerto, String msg) throws UnknownHostException, IOException {
-        Socket socket = new Socket(nroIPDestinatario.trim(), nroPuerto);
+    public void enviarMensaje(String nroIPServidorMensajes, String nombreDestinatario, String nroIPDestinatario, String nroIPEmisor, int nroPuerto, String msg) throws UnknownHostException, IOException {
+        Socket socket = new Socket(nroIPServidorMensajes.trim(), nroPuerto);
         PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
         //BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-        out.println(nombreDestinatario+"\n"+nroIPDestinatario+"\n"+msg);
-        
-        socket.close();
-        
-        /*
         if (msg.split(Mensaje.SEPARADOR)[0].equals(Mensaje.MENSAJE_RECEPCION)) {
-            setChanged();
-            notifyObservers(nombreDestinatario);
+            out.println(nombreDestinatario+"\n"+nroIPDestinatario+"\n"+msg+"\n"+nroIPEmisor);
+        } else {
+            out.println(nombreDestinatario+"\n"+nroIPDestinatario+"\n"+msg);
         }
-        */
+        socket.close();
     }
     
     public String requestDestinatarios(String nroIPDirectorio, int nroPuerto) throws IOException {
