@@ -19,15 +19,11 @@ public class InternetManager {
         
     }
     
-    public void enviarMensaje(String nroIPServidorMensajes, String nombreDestinatario, String nroIPDestinatario, String nroIPEmisor, int nroPuerto, String msg) throws UnknownHostException, IOException {
+    public void enviarMensaje(String nroIPServidorMensajes, String nombreDestinatario, String nroIPDestinatario, int nroPuerto, String msg) throws UnknownHostException, IOException {
         Socket socket = new Socket(nroIPServidorMensajes.trim(), nroPuerto);
         PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
         //BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-        if (msg.split(Mensaje.SEPARADOR)[0].equals(Mensaje.MENSAJE_RECEPCION)) {
-            out.println(nombreDestinatario+"\n"+nroIPDestinatario+"\n"+msg+"\n"+nroIPEmisor);
-        } else {
-            out.println(nombreDestinatario+"\n"+nroIPDestinatario+"\n"+msg);
-        }
+        out.println(nombreDestinatario+"\n"+nroIPDestinatario+"\n"+msg);
         socket.close();
     }
     
