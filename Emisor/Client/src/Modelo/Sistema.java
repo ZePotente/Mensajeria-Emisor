@@ -40,7 +40,7 @@ public class Sistema extends Observable implements Observer {
     
     public void ingresarComoEmisor(Usuario usuario) {
         emisor = usuario;
-        sv.addObserver(this);
+        internetManager.addObserver(this);
     }
     
     public Usuario getEmisor() {
