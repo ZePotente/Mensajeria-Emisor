@@ -5,7 +5,7 @@ import Excepciones.MalTipoDeMensajeException;
 import Excepciones.MensajeMalFormadoException;
 
 import Modelo.ArmableDesarmable;
-import Modelo.Usuario;
+import Modelo.agenda.Usuario;
 
 public class Mensaje implements ArmableDesarmable {
     // clase

@@ -4,7 +4,7 @@ import Excepciones.MensajeMalFormadoException;
 
 import Modelo.ArmableDesarmable;
 import Modelo.Sistema;
-import Modelo.Usuario;
+import Modelo.agenda.Usuario;
 
 public class MensajeAlarma extends Mensaje {
     public MensajeAlarma(String asunto, String descripcion, Usuario destinatario, Usuario emisor) {

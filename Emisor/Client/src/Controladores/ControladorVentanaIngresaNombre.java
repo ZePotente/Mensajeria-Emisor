@@ -2,7 +2,7 @@ package Controladores;
 
 import Modelo.Sistema;
 
-import Modelo.Usuario;
+import Modelo.agenda.Usuario;
 
 import Ventanas.VentanaMensaje;
 

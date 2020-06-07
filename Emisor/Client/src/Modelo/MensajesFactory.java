@@ -5,6 +5,8 @@ import Modelo.Mensaje.MensajeAlarma;
 import Modelo.Mensaje.MensajeRecepcion;
 import Modelo.Mensaje.MensajeSimple;
 
+import Modelo.agenda.Usuario;
+
 public class MensajesFactory {
     public MensajesFactory() {
         super();

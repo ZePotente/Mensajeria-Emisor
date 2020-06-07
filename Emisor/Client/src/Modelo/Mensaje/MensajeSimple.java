@@ -3,7 +3,7 @@ package Modelo.Mensaje;
 import Excepciones.MensajeMalFormadoException;
 
 import Modelo.ArmableDesarmable;
-import Modelo.Usuario;
+import Modelo.agenda.Usuario;
 
 public class MensajeSimple extends Mensaje {
     public MensajeSimple(String asunto, String descripcion, Usuario destinatario, Usuario emisor) {

@@ -5,6 +5,9 @@ import Excepciones.NoLecturaConfiguracionException;
 
 import Modelo.Mensaje.Mensaje;
 
+import Modelo.agenda.Agenda;
+import Modelo.agenda.Usuario;
+
 import configuracion.Configuracion;
 import configuracion.LectorConfiguracion;
 
