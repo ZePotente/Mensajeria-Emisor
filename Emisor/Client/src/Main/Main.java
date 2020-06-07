@@ -1,10 +1,10 @@
-package Main;
+package main;
 
-import Controladores.ControladorVentanaIngresaNombre;
-import Controladores.ControladorVentanaMensaje;
+import controladores.ControladorVentanaIngresaNombre;
+import controladores.ControladorVentanaMensaje;
 
-import Ventanas.VentanaIngresaNombre;
-import Ventanas.VentanaMensaje;
+import ventanas.VentanaIngresaNombre;
+import ventanas.VentanaMensaje;
 
 public class Main {
     public Main() {

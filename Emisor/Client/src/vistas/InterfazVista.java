@@ -1,4 +1,4 @@
-package Vista;
+package vistas;
 
 public interface InterfazVista {
     public void cerrar();

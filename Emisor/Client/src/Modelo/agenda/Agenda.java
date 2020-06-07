@@ -1,7 +1,7 @@
-package Modelo.agenda;
+package modelo.agenda;
 
-import Modelo.AgendaPersistencia;
-import Modelo.RearmadorLista;
+import modelo.AgendaPersistencia;
+import modelo.RearmadorLista;
 
 import java.io.IOException;
 

@@ -1,6 +1,6 @@
-package Modelo;
+package modelo;
 
-import Modelo.agenda.Usuario;
+import modelo.agenda.Usuario;
 
 import java.io.BufferedReader;
 import java.io.FileReader;

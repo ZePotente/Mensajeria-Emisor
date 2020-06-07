@@ -1,6 +1,6 @@
-package Ventanas;
+package ventanas;
 
-import Controladores.ControladorVentanaIngresaNombre;
+import controladores.ControladorVentanaIngresaNombre;
 
 import java.awt.BorderLayout;
 import java.awt.Container;
@@ -14,7 +14,7 @@ import javax.swing.JLabel;
 
 import javax.swing.JTextField;
 
-import Vista.InterfazVistaIngresaNombre;
+import vistas.InterfazVistaIngresaNombre;
 
 public class VentanaIngresaNombre extends JFrame implements InterfazVistaIngresaNombre {
     private ControladorVentanaIngresaNombre controlador;

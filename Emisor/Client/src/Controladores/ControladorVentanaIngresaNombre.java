@@ -1,12 +1,12 @@
-package Controladores;
+package controladores;
 
-import Modelo.Sistema;
+import modelo.Sistema;
 
-import Modelo.agenda.Usuario;
+import modelo.agenda.Usuario;
 
-import Ventanas.VentanaMensaje;
+import ventanas.VentanaMensaje;
 
-import Vista.InterfazVistaIngresaNombre;
+import vistas.InterfazVistaIngresaNombre;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

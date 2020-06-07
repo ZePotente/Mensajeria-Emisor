@@ -1,11 +1,11 @@
-package Ventanas;
+package ventanas;
 
 
-import Controladores.ControladorVentanaMensaje;
+import controladores.ControladorVentanaMensaje;
 
-import Modelo.agenda.Usuario;
+import modelo.agenda.Usuario;
 
-import Vista.InterfazVistaMensaje;
+import vistas.InterfazVistaMensaje;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
