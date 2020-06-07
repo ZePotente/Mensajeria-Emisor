@@ -1,4 +1,6 @@
-package Modelo;
+package modelo.agenda;
+
+import modelo.ArmableDesarmable;
 
 public class Usuario implements ArmableDesarmable {
     protected String nombre;

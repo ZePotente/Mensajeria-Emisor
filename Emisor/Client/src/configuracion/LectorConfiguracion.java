@@ -1,6 +1,6 @@
 package configuracion;
 
-import Excepciones.NoLecturaConfiguracionException;
+import excepciones.NoLecturaConfiguracionException;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -12,7 +12,7 @@ public class LectorConfiguracion {
      * @param nombreArch
      * Lee el archivo de configuracion.txt
      * y crea un objeto de clase <i>Configuracion</i> con su contenido.
-     * 
+     *
      * @throws NoLecturaConfiguracionException
      * Si ocurre un error con la lectura del archivo de configuracion.
      */

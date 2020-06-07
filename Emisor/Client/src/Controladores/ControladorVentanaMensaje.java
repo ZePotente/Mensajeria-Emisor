@@ -1,18 +1,18 @@
-package Controladores;
+package controladores;
 
-import Excepciones.NoConexionException;
+import excepciones.NoConexionException;
 
-import Modelo.Mensaje.Mensaje;
+import modelo.mensaje.Mensaje;
 
-import Modelo.Mensaje.MensajeAlarma;
-import Modelo.Mensaje.MensajeRecepcion;
-import Modelo.Mensaje.MensajeSimple;
+import modelo.mensaje.MensajeAlarma;
+import modelo.mensaje.MensajeRecepcion;
+import modelo.mensaje.MensajeSimple;
 
-import Modelo.MensajesFactory;
-import Modelo.Sistema;
-import Modelo.Usuario;
+import modelo.MensajesFactory;
+import modelo.Sistema;
+import modelo.agenda.Usuario;
 
-import Vista.InterfazVistaMensaje;
+import vistas.InterfazVistaMensaje;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

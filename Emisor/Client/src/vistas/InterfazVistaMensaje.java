@@ -1,6 +1,6 @@
-package Vista;
+package vistas;
 
-import Modelo.Usuario;
+import modelo.agenda.Usuario;
 
 import java.util.ArrayList;
 
