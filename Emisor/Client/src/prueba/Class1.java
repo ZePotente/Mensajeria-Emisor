@@ -10,7 +10,7 @@ public class Class1 {
     
     public static void main(String[] args) {
         String cuerpo, asunto;
-        asunto = "Asunto"; cuerpo = "Hola.";
+        asunto = "ABCDEFGHIJKLMNÑOPQRSTUVWXYZ.\n"; cuerpo = "abcdefghijklmnñopqrstuvwxyz.\nABCDEFGHIJKLMNÑOPQRSTUVWXYZ.\n";
         IEncriptacionStrategy encriptador = new EncriptacionCesarStrategy();
         
         System.out.println(asunto + cuerpo);

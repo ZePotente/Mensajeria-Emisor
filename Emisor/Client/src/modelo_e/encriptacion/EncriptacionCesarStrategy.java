@@ -33,6 +33,6 @@ public class EncriptacionCesarStrategy implements IEncriptacionStrategy {
     }
     
     private char desplazar(char base, char car) {
-        return (char) (base + (car + (this.DESPLAZAMIENTO - base+1) % 26));
+        return (char) (base + (car + this.DESPLAZAMIENTO - base) % 26);
     }
 }
