@@ -9,13 +9,30 @@ public class EncriptacionCesarStrategy implements IEncriptacionStrategy {
     @Override
     public String encriptar(String asunto, String cuerpo) {
         String mensaje = asunto + cuerpo;
+        char car;
         String cifrado = "";
-        for (int i = 0; i < cifrado.length(); i++)
-            cifrado += this.desplazar(mensaje.charAt(i));
+        // no importa el algoritmo ni la eficiencia, nomas que lo cifre.
+        // Si queres algo mas eficiente o lindo hace tu propia clase Strategy.
+        for (int i = 0; i < mensaje.length(); i++) {
+            car = mensaje.charAt(i);
+            if (isMinuscula(car))
+                car = this.desplazar('a', car);
+            else 
+                if (isMayuscula(car))
+                    car = this.desplazar('A', car);
+            cifrado += car;
+        }
         return cifrado;
     }
+    private boolean isMinuscula(char car) {
+        return car >= 'a' && car <= 'z';
+    }
     
-    private char desplazar(char car) {
-        return (char) (car + this.DESPLAZAMIENTO);
+    private boolean isMayuscula(char car) {
+        return car >= 'A' && car <= 'Z';
+    }
+    
+    private char desplazar(char base, char car) {
+        return (char) (base + (car + (this.DESPLAZAMIENTO - base+1) % 26));
     }
 }
