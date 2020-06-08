@@ -2,15 +2,15 @@ package controladores;
 
 import excepciones.NoConexionException;
 
-import modelo.mensaje.Mensaje;
+import modelo_e.mensaje.Mensaje;
 
-import modelo.mensaje.MensajeAlarma;
-import modelo.mensaje.MensajeRecepcion;
-import modelo.mensaje.MensajeSimple;
+import modelo_e.mensaje.MensajeAlarma;
+import modelo_e.mensaje.MensajeRecepcion;
+import modelo_e.mensaje.MensajeSimple;
 
-import modelo.MensajesFactory;
-import modelo.Sistema;
-import modelo.agenda.Usuario;
+import modelo_e.MensajesFactory;
+import modelo_e.Sistema;
+import modelo_e.agenda.Usuario;
 
 import vistas.InterfazVistaMensaje;
 

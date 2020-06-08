@@ -1,11 +1,11 @@
-package modelo;
+package modelo_e;
 
-import modelo.mensaje.Mensaje;
-import modelo.mensaje.MensajeAlarma;
-import modelo.mensaje.MensajeRecepcion;
-import modelo.mensaje.MensajeSimple;
+import modelo_e.mensaje.Mensaje;
+import modelo_e.mensaje.MensajeAlarma;
+import modelo_e.mensaje.MensajeRecepcion;
+import modelo_e.mensaje.MensajeSimple;
 
-import modelo.agenda.Usuario;
+import modelo_e.agenda.Usuario;
 
 public class MensajesFactory {
     public MensajesFactory() {
