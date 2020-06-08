@@ -1,8 +1,8 @@
 package controladores;
 
-import modelo.Sistema;
+import modelo_e.Sistema;
 
-import modelo.agenda.Usuario;
+import modelo_e.agenda.Usuario;
 
 import ventanas.VentanaMensaje;
 

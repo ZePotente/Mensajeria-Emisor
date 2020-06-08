@@ -1,6 +1,6 @@
-package modelo;
+package modelo_e;
 
-import modelo.mensaje.Mensaje;
+import modelo_e.mensaje.Mensaje;
 
 import java.io.BufferedReader;
 import java.io.IOException;

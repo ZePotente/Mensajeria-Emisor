@@ -1,11 +1,11 @@
-package modelo.mensaje;
+package modelo_e.mensaje;
 
 import excepciones.MalTipoDeMensajeException;
 
 import excepciones.MensajeMalFormadoException;
 
-import modelo.ArmableDesarmable;
-import modelo.agenda.Usuario;
+import modelo_e.ArmableDesarmable;
+import modelo_e.agenda.Usuario;
 
 public class Mensaje implements ArmableDesarmable {
     // clase

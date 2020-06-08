@@ -1,12 +1,12 @@
-package modelo;
+package modelo_e;
 
 import excepciones.NoConexionException;
 import excepciones.NoLecturaConfiguracionException;
 
-import modelo.mensaje.Mensaje;
+import modelo_e.mensaje.Mensaje;
 
-import modelo.agenda.Agenda;
-import modelo.agenda.Usuario;
+import modelo_e.agenda.Agenda;
+import modelo_e.agenda.Usuario;
 
 import configuracion.Configuracion;
 import configuracion.LectorConfiguracion;

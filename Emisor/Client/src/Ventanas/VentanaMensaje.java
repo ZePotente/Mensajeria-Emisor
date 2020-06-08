@@ -3,7 +3,7 @@ package ventanas;
 
 import controladores.ControladorVentanaMensaje;
 
-import modelo.agenda.Usuario;
+import modelo_e.agenda.Usuario;
 
 import vistas.InterfazVistaMensaje;
 
