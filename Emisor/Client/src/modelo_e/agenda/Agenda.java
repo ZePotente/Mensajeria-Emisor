@@ -7,7 +7,7 @@ import java.io.IOException;
 
 import java.util.ArrayList;
 
-public class Agenda {
+public class Agenda implements IAgenda {
     private AgendaPersistencia agendaPersistencia;
     private ArrayList<Usuario> destinatarios;
 
