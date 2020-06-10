@@ -10,7 +10,7 @@ import java.net.Socket;
 
 import java.util.Observable;
 
-public class ServerRecepcion extends Observable {
+public class ServerRecepcion extends Observable implements IServerRecepcion {
     private ServerSocket sv;
     private int puerto;
     
