@@ -171,6 +171,12 @@ public class VentanaMensaje extends JFrame implements InterfazVistaMensaje {
         return cuerpoTextArea.getText();
     }
     
+    public void limpiarCampos() {
+        asuntoTextField.setText("");
+        cuerpoTextArea.setText("");
+        listaDestinatarios.clearSelection();
+    }
+    
     public String getTipoDeMensaje() {
         return (String)listaTiposDeMensajes.getSelectedItem();
     }
@@ -201,7 +207,7 @@ public class VentanaMensaje extends JFrame implements InterfazVistaMensaje {
         }
     }
     
-    public void mostrarMensajeError(String mensaje) {
+    public void mostrarMensaje(String mensaje) {
         JOptionPane.showMessageDialog(null, mensaje);
     }
     

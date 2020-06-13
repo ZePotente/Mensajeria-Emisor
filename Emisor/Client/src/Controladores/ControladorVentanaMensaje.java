@@ -46,6 +46,8 @@ public class ControladorVentanaMensaje implements ActionListener, Observer {
             ArrayList<Usuario> destinatarios = vista.getDestinatarios();
             if (verificarCamposCorrectos(asunto, descripcion, destinatarios)) {
                 enviarMensaje(asunto,descripcion,destinatarios);
+                vista.limpiarCampos();
+                vista.mostrarMensaje("Mensaje enviado con exito");
             }
         } else if (evento.getActionCommand().equals(InterfazVistaMensaje.ACTUALIZAR)) {
             actualizarlistaDestinatarios();
@@ -57,19 +59,19 @@ public class ControladorVentanaMensaje implements ActionListener, Observer {
             ArrayList<Usuario> destinatarios = sistema.requestDestinatarios();
             vista.actualizarListaDestinatarios(destinatarios);
         } catch (NoConexionException e) {
-            vista.mostrarMensajeError("Error al conectar con el directorio");
+            vista.mostrarMensaje("Error al conectar con el directorio");
         }
     }
     
     private boolean verificarCamposCorrectos(String asunto, String descripcion, ArrayList<Usuario> destinatarios) {
         if (asunto == null || asunto.isEmpty()) {
-            vista.mostrarMensajeError("El asunto no debe estar vacio");
+            vista.mostrarMensaje("El asunto no debe estar vacio");
             return false;
         } else if (descripcion == null || descripcion.isEmpty()) {
-            vista.mostrarMensajeError("La descripcion no debe estar vacia");
+            vista.mostrarMensaje("La descripcion no debe estar vacia");
             return false;
         } else if (destinatarios == null || destinatarios.isEmpty()) {
-            vista.mostrarMensajeError("Debe elegir algun destinatario de la lista");
+            vista.mostrarMensaje("Debe elegir algun destinatario de la lista");
             return false;
         } else {
             return true;
@@ -84,10 +86,10 @@ public class ControladorVentanaMensaje implements ActionListener, Observer {
                 try {
                     sistema.enviarMensaje(mensaje);
                 } catch (Exception e) {
-                    vista.mostrarMensajeError("Error al enviar el mensaje");
+                    vista.mostrarMensaje("Error al enviar el mensaje");
                 }
             } else {
-                vista.mostrarMensajeError("Error al enviar el mensaje");
+                vista.mostrarMensaje("Error al enviar el mensaje");
             }
         }
     }

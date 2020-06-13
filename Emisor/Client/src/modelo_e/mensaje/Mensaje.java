@@ -14,7 +14,7 @@ public class Mensaje implements ArmableDesarmable {
     protected String asunto;
     protected String descripcion;
     protected Usuario emisor;
-    protected Usuario destinatario; // lo dejo aparte porque capaz sea otra clase mas especializada
+    protected Usuario destinatario;
     
     public Mensaje(String asunto, String descripcion, Usuario destinatario, Usuario emisor) {
         this.asunto = asunto;
@@ -42,31 +42,6 @@ public class Mensaje implements ArmableDesarmable {
     public Usuario getDestinatario() {
         return this.destinatario;
     }
-    
-    /*
-    public static Mensaje armar(String tipoYMsg) throws MalTipoDeMensajeException, MensajeMalFormadoException {
-        Mensaje mensaje;
-        String tipo, msg;
-        String[] aux = tipoYMsg.split(ArmableDesarmable.SEPARADOR);
-        tipo = aux[0];
-        
-        msg = tipoYMsg.substring(tipo.length() + SEPARADOR.length()); // sin tomar el tipo de mensaje y el separador
-        switch (tipo) {
-        case MENSAJE_SIMPLE:
-            mensaje = MensajeSimple.armar(msg);
-            break;
-        case MENSAJE_ALARMA:    
-            mensaje = MensajeAlarma.armar(msg);
-            break;
-        case MENSAJE_RECEPCION: 
-            mensaje = MensajeRecepcion.armar(msg);
-            break;
-        default:
-            throw new MalTipoDeMensajeException(tipo);
-        }
-        return mensaje;
-    }
-    */
     
     public String getAsunto() {
         return asunto;

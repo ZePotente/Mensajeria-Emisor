@@ -14,9 +14,11 @@ import java.awt.event.ActionListener;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
+import modelo_e.ILoginAuthenticator;
+
 public class ControladorVentanaIngresaNombre implements ActionListener {
     private InterfazVistaIngresaNombre vista;
-    private Sistema sistema;
+    private ILoginAuthenticator sistema;
 
     public ControladorVentanaIngresaNombre(InterfazVistaIngresaNombre vista) {
         this.vista = vista;
@@ -31,7 +33,7 @@ public class ControladorVentanaIngresaNombre implements ActionListener {
             ventana.setControlador(controlador);
             try {
                 String nroIP = InetAddress.getLocalHost().getHostAddress();
-                sistema.ingresarComoEmisor(new Usuario(vista.getNombre(), nroIP));
+                sistema.ingresar(new Usuario(vista.getNombre(), nroIP));
                 ventana.abrir();
                 vista.cerrar();
             } catch (UnknownHostException e) {

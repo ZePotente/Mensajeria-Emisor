@@ -16,6 +16,7 @@ public interface InterfazVistaMensaje extends InterfazVista {
     public ArrayList<Usuario> getDestinatarios();
     public String getTipoDeMensaje();
     public void agregarNotification(Usuario receptor);
-    public void mostrarMensajeError(String mensaje);
+    public void mostrarMensaje(String mensaje);
     public void actualizarListaDestinatarios(ArrayList<Usuario> destinatarios);
+    public void limpiarCampos();
 }

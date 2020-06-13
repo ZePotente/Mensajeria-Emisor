@@ -19,14 +19,12 @@ import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
-public class Sistema extends Observable implements Observer {
-    // clase
+public class Sistema extends Observable implements Observer, ILoginAuthenticator {
     private static Sistema instancia;
     private static final int NRO_PUERTO_DIRECTORIO = 100,
                              NRO_PUERTO_SERVIDORMENSAJES = 200,
                              NRO_PUERTO_NOTIFICACION_RECEPCION = 300;
     private static final String ARCHIVO_CONFIG = "configuracion.txt";
-    // instancia
     private Configuracion config;
     private Agenda agenda;
     private InternetManager internetManager;
@@ -40,8 +38,7 @@ public class Sistema extends Observable implements Observer {
         sv = new ServerRecepcion(Sistema.NRO_PUERTO_NOTIFICACION_RECEPCION);
     }
     
-    
-    public void ingresarComoEmisor(Usuario usuario) {
+    public void ingresar(Usuario usuario) {
         emisor = usuario;
         internetManager.addObserver(this);
     }
@@ -78,25 +75,13 @@ public class Sistema extends Observable implements Observer {
             String lista = lista = internetManager.requestDestinatarios(this.config.getNroIPDirectorio(), NRO_PUERTO_DIRECTORIO);
             ArrayList<Usuario> destinatarios = agenda.actualizarDestinatarios(lista);
             return destinatarios;
-            // llamar al que la rearme y que se actualice
         } catch (IOException e) {
-            throw new NoConexionException(e); //porque la captura el controlador, que no deberia
+            throw new NoConexionException(e);
         }
     }
     
     public ArrayList<Usuario> getDestinatarios() {
         return agenda.getDestinatarios();
-    }
-    
-    // los tres metodos que siguen son para manejo de recepcion de mensajes en el IMR
-
-    public void conexionExitosa() {
-    }
-    
-    public void errorConexion(String error) {
-    }
-
-    public void finConexion() {
     }
 
     @Override
