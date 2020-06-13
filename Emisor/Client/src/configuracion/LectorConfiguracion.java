@@ -1,6 +1,6 @@
 package configuracion;
 
-import excepciones.NoLecturaConfiguracionException;
+import Excepciones.NoLecturaConfiguracionException;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;

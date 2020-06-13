@@ -19,12 +19,13 @@ import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
+import modelo_e.persistencia.EnvioMensajeDelegate;
 import modelo_e.persistencia.IPersistidor;
 import modelo_e.persistencia.IVerificadorMensajesPendientes;
 import modelo_e.persistencia.PersistenciaMensaje;
 import modelo_e.persistencia.SchedulerPersistencia;
 
-public class Sistema extends Observable implements Observer, ILoginAuthenticator {
+public class Sistema extends Observable implements Observer, ILoginAuthenticator, EnvioMensajeDelegate {
     private static Sistema instancia;
     private static final int NRO_PUERTO_DIRECTORIO = 100,
                              NRO_PUERTO_SERVIDORMENSAJES = 200,
@@ -43,8 +44,8 @@ public class Sistema extends Observable implements Observer, ILoginAuthenticator
         agenda = new Agenda();
         internetManager = new InternetManager();
         sv = new ServerRecepcion(Sistema.NRO_PUERTO_NOTIFICACION_RECEPCION);
-        verificadorMensajesPendientes = new SchedulerPersistencia();
         persistidor = new PersistenciaMensaje();
+        verificadorMensajesPendientes = new SchedulerPersistencia(persistidor, this);
     }
     
     public void ingresar(Usuario usuario) {
@@ -71,15 +72,18 @@ public class Sistema extends Observable implements Observer, ILoginAuthenticator
         return instancia;
     }
 
-    public void enviarMensaje(Mensaje mensaje) throws UnknownHostException {
+    public boolean enviarMensaje(Mensaje mensaje) {
         String mensajeString = mensaje.desarmar();
-        try {
-            internetManager.enviarMensaje(this.config.getIPSvMensajes(), mensaje.getDestinatario().getNombre(),
-                                          mensaje.getDestinatario().getNumeroDeIP(), NRO_PUERTO_SERVIDORMENSAJES,
-                                          mensajeString);
-        } catch (IOException e) {
-            persistidor.guardarDatos(mensaje);
-        }
+         if (!internetManager.enviarMensaje(this.config.getIPSvMensajes(),
+                                            mensaje.getDestinatario().getNombre(),
+                                            mensaje.getDestinatario().getNumeroDeIP(),
+                                            NRO_PUERTO_SERVIDORMENSAJES,
+                                            mensajeString)) {
+                                                persistidor.guardarDatos(mensaje);
+                                                return false;
+         } else {
+             return true;
+         }
     }
     
     public ArrayList<Usuario> requestDestinatarios() throws NoConexionException {

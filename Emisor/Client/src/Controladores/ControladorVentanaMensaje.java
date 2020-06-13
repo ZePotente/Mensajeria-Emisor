@@ -1,6 +1,6 @@
 package controladores;
 
-import excepciones.NoConexionException;
+import Excepciones.NoConexionException;
 
 import modelo_e.mensaje.Mensaje;
 
@@ -47,7 +47,6 @@ public class ControladorVentanaMensaje implements ActionListener, Observer {
             if (verificarCamposCorrectos(asunto, descripcion, destinatarios)) {
                 enviarMensaje(asunto,descripcion,destinatarios);
                 vista.limpiarCampos();
-                vista.mostrarMensaje("Mensaje enviado con exito");
             }
         } else if (evento.getActionCommand().equals(InterfazVistaMensaje.ACTUALIZAR)) {
             actualizarlistaDestinatarios();
@@ -83,13 +82,9 @@ public class ControladorVentanaMensaje implements ActionListener, Observer {
             Mensaje mensaje;
             mensaje = crearMensaje(asunto, cuerpo, destinatario);
             if (mensaje != null) {
-                try {
-                    sistema.enviarMensaje(mensaje);
-                } catch (Exception e) {
-                    vista.mostrarMensaje("Error al enviar el mensaje");
-                }
-            } else {
-                vista.mostrarMensaje("Error al enviar el mensaje");
+                boolean envioExitoso = sistema.enviarMensaje(mensaje);
+                String mensajeAMostrar = envioExitoso ? "Mensaje enviado con exito" : "Error al enviar el mensaje";
+                vista.mostrarMensaje(mensajeAMostrar);
             }
         }
     }

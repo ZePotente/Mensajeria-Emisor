@@ -1,18 +1,26 @@
 package modelo_e.persistencia;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+
+import java.io.PrintWriter;
+
+import java.nio.file.Files;
 
 import java.util.ArrayList;
 
 import modelo_e.mensaje.Mensaje;
 
-public class PersistenciaMensaje implements IPersistidor {
+public class PersistenciaMensaje<T> implements IPersistidor {
     private final String fileName = "mensajesPendientes.txt";
     public PersistenciaMensaje() {
         super();
@@ -20,46 +28,46 @@ public class PersistenciaMensaje implements IPersistidor {
 
     @Override
     public void guardarDatos(Object object) {
-        FileOutputStream file;
         try {
-            file = new FileOutputStream(new File(fileName));
+            FileOutputStream file = new FileOutputStream(fileName, true);
             ObjectOutputStream output = new ObjectOutputStream(file);
             output.writeObject(object);
+            output.flush();
             output.close();
             file.close();
-        } catch (FileNotFoundException e) {
-            System.out.println("Archivo no encontrado");
         } catch (IOException e) {
-                
+            
         }
-        
     }
 
     @Override
     public Object recuperarDatos() {
-        ArrayList<Mensaje> mensajesLeidos = new ArrayList<>();
+        ArrayList<Object> objectsList = new ArrayList<>();
+        File file = new File(fileName);
         try {
-            FileInputStream file = new FileInputStream(new File(fileName));
+            FileInputStream fileStream = new FileInputStream(file);
             boolean cont = true;
             while (cont) {
-                try (ObjectInputStream input = new ObjectInputStream(file)) {
-                    Mensaje mensaje = (Mensaje)input.readObject();
-                    if (mensaje != null) {
-                        mensajesLeidos.add(mensaje);
-                    } else {
-                        cont = false;
-                    }
-                    input.close();
+                Object obj = null;
+                try {
+                    ObjectInputStream input = new ObjectInputStream(fileStream);
+                    obj = input.readObject();
                 } catch (ClassNotFoundException e) {
-                    System.out.println("Error de casteo");
+                }
+                if (obj != null) {
+                  objectsList.add(obj);
+                } else {
+                  cont = false;
                 }
             }
-            file.close();
         } catch (FileNotFoundException e) {
-            System.out.println("Archivo no encontrado");
         } catch (IOException e) {
-            System.out.println("Otro error");
         }
-        return mensajesLeidos;
+        try {
+            new PrintWriter(fileName).close();
+        } catch (FileNotFoundException e) {
+        }
+        return objectsList;
+        
     }
 }

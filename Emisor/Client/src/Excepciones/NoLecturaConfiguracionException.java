@@ -1,4 +1,4 @@
-package excepciones;
+package Excepciones;
 
 public class NoLecturaConfiguracionException extends Exception {
     public NoLecturaConfiguracionException(String string, Throwable throwable, boolean b, boolean b1) {
