@@ -79,6 +79,40 @@
    </hash>
    <hash n="oracle.jdeveloper.deploy.dt.DeploymentProfiles">
       <hash n="profileDefinitions">
+         <hash n="EmisorFInalApp">
+            <hash n="archiveOptions">
+               <value n="hasManifest" v="true"/>
+               <value n="mainClass" v="main.Main"/>
+            </hash>
+            <hash n="fileGroups">
+               <list n="groups">
+                  <hash>
+                     <list n="contributors">
+                        <hash>
+                           <value n="type" v="2"/>
+                        </hash>
+                        <hash>
+                           <value n="type" v="7"/>
+                        </hash>
+                     </list>
+                     <value n="displayName" v="Project Output"/>
+                     <hash n="filters">
+                        <list n="rules">
+                           <hash>
+                              <value n="pattern" v="**"/>
+                              <value n="type" v="0"/>
+                           </hash>
+                        </list>
+                     </hash>
+                     <value n="internalName" v="project-output"/>
+                     <value n="type" v="1"/>
+                  </hash>
+               </list>
+            </hash>
+            <url n="jarURL" path="deploy/emisorfinalapp.jar"/>
+            <value n="profileClass" v="oracle.jdeveloper.deploy.jar.ClientProfile"/>
+            <value n="profileName" v="EmisorFInalApp"/>
+         </hash>
          <hash n="EmisorPrueba">
             <hash n="archiveOptions">
                <value n="hasManifest" v="true"/>
@@ -113,9 +147,45 @@
             <value n="profileClass" v="oracle.jdeveloper.deploy.jar.ClientProfile"/>
             <value n="profileName" v="EmisorPrueba"/>
          </hash>
+         <hash n="EmisorRecepcion">
+            <hash n="archiveOptions">
+               <value n="hasManifest" v="true"/>
+               <value n="mainClass" v="main.Main"/>
+            </hash>
+            <hash n="fileGroups">
+               <list n="groups">
+                  <hash>
+                     <list n="contributors">
+                        <hash>
+                           <value n="type" v="2"/>
+                        </hash>
+                        <hash>
+                           <value n="type" v="7"/>
+                        </hash>
+                     </list>
+                     <value n="displayName" v="Project Output"/>
+                     <hash n="filters">
+                        <list n="rules">
+                           <hash>
+                              <value n="pattern" v="**"/>
+                              <value n="type" v="0"/>
+                           </hash>
+                        </list>
+                     </hash>
+                     <value n="internalName" v="project-output"/>
+                     <value n="type" v="1"/>
+                  </hash>
+               </list>
+            </hash>
+            <url n="jarURL" path="deploy/emisorrecepcion.jar"/>
+            <value n="profileClass" v="oracle.jdeveloper.deploy.jar.ClientProfile"/>
+            <value n="profileName" v="EmisorRecepcion"/>
+         </hash>
       </hash>
       <list n="profileList">
          <string v="EmisorPrueba"/>
+         <string v="EmisorFInalApp"/>
+         <string v="EmisorRecepcion"/>
       </list>
    </hash>
    <hash n="oracle.jdeveloper.runner.RunConfigurations">
