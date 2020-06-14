@@ -19,14 +19,14 @@ public class InternetManager extends Observable implements IInternetManager {
         
     }
     
-    public boolean enviarMensaje(String nroIPServidorMensajes, String nombreDestinatario, String nroIPDestinatario, int nroPuerto, String msg) {
+    public boolean enviarMensaje(String nroIPServidorMensajes, String nombreDestinatario, String nroIPDestinatario, int nroPuerto, String nroIPEmisor, String msg) {
         Socket socket;
         try {
             socket = new Socket(nroIPServidorMensajes.trim(), nroPuerto);
             PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
             //BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             if (msg.split(Mensaje.SEPARADOR)[0].equals(Mensaje.MENSAJE_RECEPCION)) {
-                out.println(nombreDestinatario+"\n"+nroIPDestinatario+"\n"+msg+"\n"+"192.168.0.41");
+                out.println(nombreDestinatario+"\n"+nroIPDestinatario+"\n"+msg+"\n"+nroIPEmisor);
             } else {
                 out.println(nombreDestinatario+"\n"+nroIPDestinatario+"\n"+msg);
             }

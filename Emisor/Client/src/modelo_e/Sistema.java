@@ -74,16 +74,17 @@ public class Sistema extends Observable implements Observer, ILoginAuthenticator
 
     public boolean enviarMensaje(Mensaje mensaje) {
         String mensajeString = mensaje.desarmar();
-         if (!internetManager.enviarMensaje(this.config.getIPSvMensajes(),
+        if (!internetManager.enviarMensaje(this.config.getIPSvMensajes(),
                                             mensaje.getDestinatario().getNombre(),
                                             mensaje.getDestinatario().getNumeroDeIP(),
                                             NRO_PUERTO_SERVIDORMENSAJES,
+                                            emisor.getNumeroDeIP(),
                                             mensajeString)) {
-                                                persistidor.guardarDatos(mensaje);
-                                                return false;
-         } else {
-             return true;
-         }
+            persistidor.guardarDatos(mensaje);
+            return false;
+        } else {
+            return true;
+        }
     }
     
     public ArrayList<Usuario> requestDestinatarios() throws NoConexionException {
