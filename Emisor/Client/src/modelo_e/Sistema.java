@@ -81,10 +81,10 @@ public class Sistema extends Observable implements Observer, ILoginAuthenticator
         Mensaje aux = (Mensaje) mensaje.clone();
         aux.setAsunto(encriptador.encriptar(mensaje.getAsunto()));
         aux.setDescripcion(encriptador.encriptar(mensaje.getDescripcion()));
-        String mensajeString = mensaje.desarmar();
+        String mensajeString = aux.desarmar();
         if (!internetManager.enviarMensaje(this.config.getIPSvMensajes(),
-                                            mensaje.getDestinatario().getNombre(),
-                                            mensaje.getDestinatario().getNumeroDeIP(),
+                                            aux.getDestinatario().getNombre(),
+                                            aux.getDestinatario().getNumeroDeIP(),
                                             NRO_PUERTO_SERVIDORMENSAJES,
                                             emisor.getNumeroDeIP(),
                                             mensajeString)) {
