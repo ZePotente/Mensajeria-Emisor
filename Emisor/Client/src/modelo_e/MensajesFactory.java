@@ -12,7 +12,6 @@ public class MensajesFactory {
         super();
     }
     
-    
     public Mensaje crearMensaje(String tipo, String asunto, String cuerpo, Usuario destinatario, Usuario emisor) {
         if (tipo.equalsIgnoreCase("recepcion")) {
             return new MensajeRecepcion(asunto, cuerpo, destinatario, emisor);

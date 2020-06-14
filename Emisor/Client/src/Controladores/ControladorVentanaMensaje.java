@@ -1,6 +1,6 @@
 package controladores;
 
-import excepciones.NoConexionException;
+import Excepciones.NoConexionException;
 
 import modelo_e.mensaje.Mensaje;
 
@@ -46,6 +46,7 @@ public class ControladorVentanaMensaje implements ActionListener, Observer {
             ArrayList<Usuario> destinatarios = vista.getDestinatarios();
             if (verificarCamposCorrectos(asunto, descripcion, destinatarios)) {
                 enviarMensaje(asunto,descripcion,destinatarios);
+                vista.limpiarCampos();
             }
         } else if (evento.getActionCommand().equals(InterfazVistaMensaje.ACTUALIZAR)) {
             actualizarlistaDestinatarios();
@@ -57,19 +58,19 @@ public class ControladorVentanaMensaje implements ActionListener, Observer {
             ArrayList<Usuario> destinatarios = sistema.requestDestinatarios();
             vista.actualizarListaDestinatarios(destinatarios);
         } catch (NoConexionException e) {
-            vista.mostrarMensajeError("Error al conectar con el directorio");
+            vista.mostrarMensaje("Error al conectar con el directorio");
         }
     }
     
     private boolean verificarCamposCorrectos(String asunto, String descripcion, ArrayList<Usuario> destinatarios) {
         if (asunto == null || asunto.isEmpty()) {
-            vista.mostrarMensajeError("El asunto no debe estar vacio");
+            vista.mostrarMensaje("El asunto no debe estar vacio");
             return false;
         } else if (descripcion == null || descripcion.isEmpty()) {
-            vista.mostrarMensajeError("La descripcion no debe estar vacia");
+            vista.mostrarMensaje("La descripcion no debe estar vacia");
             return false;
         } else if (destinatarios == null || destinatarios.isEmpty()) {
-            vista.mostrarMensajeError("Debe elegir algun destinatario de la lista");
+            vista.mostrarMensaje("Debe elegir algun destinatario de la lista");
             return false;
         } else {
             return true;
@@ -81,13 +82,9 @@ public class ControladorVentanaMensaje implements ActionListener, Observer {
             Mensaje mensaje;
             mensaje = crearMensaje(asunto, cuerpo, destinatario);
             if (mensaje != null) {
-                try {
-                    sistema.enviarMensaje(mensaje);
-                } catch (Exception e) {
-                    vista.mostrarMensajeError("Error al enviar el mensaje");
-                }
-            } else {
-                vista.mostrarMensajeError("Error al enviar el mensaje");
+                boolean envioExitoso = sistema.enviarMensaje(mensaje);
+                String mensajeAMostrar = envioExitoso ? "Mensaje enviado con exito" : "Error al enviar el mensaje";
+                vista.mostrarMensaje(mensajeAMostrar);
             }
         }
     }

@@ -1,4 +1,4 @@
-package excepciones;
+package Excepciones;
 
 public class MensajeMalFormadoException extends Exception {
     private int largo, largoEsperado;
