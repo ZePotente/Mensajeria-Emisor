@@ -1,13 +1,15 @@
 package modelo_e.mensaje;
 
-import excepciones.MalTipoDeMensajeException;
+import Excepciones.MalTipoDeMensajeException;
 
-import excepciones.MensajeMalFormadoException;
+import Excepciones.MensajeMalFormadoException;
+
+import java.io.Serializable;
 
 import modelo_e.ArmableDesarmable;
 import modelo_e.agenda.Usuario;
 
-public class Mensaje implements ArmableDesarmable {
+public class Mensaje implements ArmableDesarmable, Serializable {
     // clase
     public static final String MENSAJE_SIMPLE = "1", MENSAJE_ALARMA = "2", MENSAJE_RECEPCION = "3";
     // instancia

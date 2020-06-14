@@ -1,6 +1,6 @@
 package modelo_e.mensaje;
 
-import excepciones.MensajeMalFormadoException;
+import Excepciones.MensajeMalFormadoException;
 
 import modelo_e.ArmableDesarmable;
 import modelo_e.agenda.Usuario;

@@ -1,8 +1,10 @@
 package modelo_e.agenda;
 
+import java.io.Serializable;
+
 import modelo_e.ArmableDesarmable;
 
-public class Usuario implements ArmableDesarmable {
+public class Usuario implements ArmableDesarmable, Serializable {
     protected String nombre;
     protected String numeroDeIP;
     protected boolean estado;

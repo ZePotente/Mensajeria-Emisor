@@ -19,17 +19,25 @@ public class InternetManager extends Observable implements IInternetManager {
         
     }
     
-    public void enviarMensaje(String nroIPServidorMensajes, String nombreDestinatario, String nroIPDestinatario, int nroPuerto, String msg) throws UnknownHostException, IOException {
-        Socket socket = new Socket(nroIPServidorMensajes.trim(), nroPuerto);
-        PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
-        //BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-        if (msg.split(Mensaje.SEPARADOR)[0].equals(Mensaje.MENSAJE_RECEPCION)) {
-            out.println(nombreDestinatario+"\n"+nroIPDestinatario+"\n"+msg+"\n"+"192.168.0.41");
-        } else {
-            out.println(nombreDestinatario+"\n"+nroIPDestinatario+"\n"+msg);
+    public boolean enviarMensaje(String nroIPServidorMensajes, String nombreDestinatario, String nroIPDestinatario, int nroPuerto, String msg) {
+        Socket socket;
+        try {
+            socket = new Socket(nroIPServidorMensajes.trim(), nroPuerto);
+            PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
+            //BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            if (msg.split(Mensaje.SEPARADOR)[0].equals(Mensaje.MENSAJE_RECEPCION)) {
+                out.println(nombreDestinatario+"\n"+nroIPDestinatario+"\n"+msg+"\n"+"192.168.0.41");
+            } else {
+                out.println(nombreDestinatario+"\n"+nroIPDestinatario+"\n"+msg);
+            }
+            
+            socket.close();
+            return true;
+        } catch (UnknownHostException e) {
+            return false;
+        } catch (IOException e) {
+            return false;
         }
-        
-        socket.close();
     }
     
     public String requestDestinatarios(String nroIPDirectorio, int nroPuerto) throws IOException {
