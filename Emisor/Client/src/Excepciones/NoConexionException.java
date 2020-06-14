@@ -1,4 +1,4 @@
-package Excepciones;
+package excepciones;
 
 public class NoConexionException extends Exception {
     public NoConexionException(String string, Throwable throwable, boolean b, boolean b1) {

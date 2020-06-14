@@ -1,4 +1,4 @@
-package Excepciones;
+package excepciones;
 
 public class MalTipoDeMensajeException extends Exception {
     private String tipo;

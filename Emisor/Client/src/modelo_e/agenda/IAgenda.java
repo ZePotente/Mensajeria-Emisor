@@ -4,5 +4,5 @@ import java.util.ArrayList;
 
 public interface IAgenda {
     public ArrayList<Usuario> getDestinatarios();
-    public ArrayList<Usuario> actualizarDestinatarios(String lista);
+    public void actualizarDestinatarios(String lista);
 }
