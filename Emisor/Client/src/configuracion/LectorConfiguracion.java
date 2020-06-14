@@ -1,6 +1,5 @@
 package configuracion;
 
-import Excepciones.NoLecturaConfiguracionException;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -22,10 +21,17 @@ public class LectorConfiguracion {
             arch = new FileInputStream(nombreArch);
             Scanner sc = new Scanner(arch);    
             
-            String nroIPDirectorio = sc.nextLine(); 
+            //directorio 1
+            String nroIPDir1 = sc.nextLine();
+            String puertoDir1 = sc.nextLine();
+            //directorio 2
+            String nroIPDir2 = sc.nextLine();
+            String puertoDir2 = sc.nextLine();
+            //svmsj
             String nroIPSvMensajes = sc.nextLine();
-            Configuracion config = new Configuracion(nroIPDirectorio, nroIPSvMensajes);
             sc.close();
+            
+            Configuracion config = new Configuracion(nroIPDir1, puertoDir1, nroIPDir2, puertoDir2, nroIPSvMensajes);
             return config;
         } catch (FileNotFoundException e) {
             throw new NoLecturaConfiguracionException(e);

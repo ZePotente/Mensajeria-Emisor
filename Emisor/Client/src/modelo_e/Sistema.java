@@ -1,7 +1,7 @@
 package modelo_e;
 
-import Excepciones.NoConexionException;
-import Excepciones.NoLecturaConfiguracionException;
+import excepciones.NoConexionException;
+import configuracion.NoLecturaConfiguracionException;
 
 import modelo_e.mensaje.Mensaje;
 
@@ -27,7 +27,7 @@ import modelo_e.persistencia.SchedulerPersistencia;
 
 public class Sistema extends Observable implements Observer, ILoginAuthenticator, EnvioMensajeDelegate {
     private static Sistema instancia;
-    private static final int NRO_PUERTO_DIRECTORIO = 100,
+    private static final int /*NRO_PUERTO_DIRECTORIO = 100,*/
                              NRO_PUERTO_SERVIDORMENSAJES = 200,
                              NRO_PUERTO_NOTIFICACION_RECEPCION = 300;
     private static final String ARCHIVO_CONFIG = "configuracion.txt";
@@ -88,14 +88,24 @@ public class Sistema extends Observable implements Observer, ILoginAuthenticator
     }
     
     public ArrayList<Usuario> requestDestinatarios() throws NoConexionException {
+        String lista;
         try {
-            System.out.println(this.config.getNroIPDirectorio());
-            String lista = lista = internetManager.requestDestinatarios(this.config.getNroIPDirectorio(), NRO_PUERTO_DIRECTORIO);
-            ArrayList<Usuario> destinatarios = agenda.actualizarDestinatarios(lista);
-            return destinatarios;
+            lista = requestDestinatarios(this.config.getNroIPDir1(), this.config.getPuertoDir1());
         } catch (IOException e) {
-            throw new NoConexionException(e);
+            try {
+                lista = requestDestinatarios(this.config.getNroIPDir2(), this.config.getPuertoDir2());
+            } catch (IOException f) {
+                throw new NoConexionException(e);
+            }
         }
+        agenda.actualizarDestinatarios(lista);
+        return getDestinatarios();
+    }
+    
+    private String requestDestinatarios(String ip, int puerto) throws IOException {
+        String lista;
+        lista = internetManager.requestDestinatarios(ip, puerto);
+        return lista;
     }
     
     public ArrayList<Usuario> getDestinatarios() {

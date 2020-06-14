@@ -1,8 +1,8 @@
 package modelo_e.mensaje;
 
-import Excepciones.MalTipoDeMensajeException;
+import excepciones.MalTipoDeMensajeException;
 
-import Excepciones.MensajeMalFormadoException;
+import excepciones.MensajeMalFormadoException;
 
 import java.io.Serializable;
 

@@ -32,7 +32,7 @@ public class Agenda implements IAgenda {
     /**
      * @param lista
      */
-    public ArrayList<Usuario> actualizarDestinatarios(String lista) {
+    public void actualizarDestinatarios(String lista) {
         ArrayList<Usuario> aux = new ArrayList<Usuario>();
         ArrayList<String[]> listaString = RearmadorLista.obtenerDestinatarios(lista);     
         for (String[] arrString : listaString) {
@@ -41,6 +41,5 @@ public class Agenda implements IAgenda {
             aux.add(usuario);
         }
         destinatarios = aux;
-        return destinatarios;
     }
 }

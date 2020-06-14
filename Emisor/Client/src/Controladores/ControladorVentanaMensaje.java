@@ -1,6 +1,6 @@
 package controladores;
 
-import Excepciones.NoConexionException;
+import excepciones.NoConexionException;
 
 import modelo_e.mensaje.Mensaje;
 
