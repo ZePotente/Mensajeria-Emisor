@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 import modelo_e.ArmableDesarmable;
 
-public class Usuario implements ArmableDesarmable, Serializable {
+public class Usuario implements ArmableDesarmable, Serializable, Cloneable {
     protected String nombre;
     protected String numeroDeIP;
     protected boolean estado;
@@ -12,6 +12,16 @@ public class Usuario implements ArmableDesarmable, Serializable {
     public Usuario(String nombre, String numeroDeIP) {
         this.nombre = nombre;
         this.numeroDeIP = numeroDeIP;
+    }
+    
+    public Object clone() {
+        Object ob = null;
+        try {
+            ob = super.clone();
+        } catch (CloneNotSupportedException e) {
+            //esta sobreescrito asi que no hace falta.
+        }
+        return ob;
     }
     
     public String getNumeroDeIP() {

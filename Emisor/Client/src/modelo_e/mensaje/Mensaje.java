@@ -9,7 +9,7 @@ import java.io.Serializable;
 import modelo_e.ArmableDesarmable;
 import modelo_e.agenda.Usuario;
 
-public class Mensaje implements ArmableDesarmable, Serializable {
+public class Mensaje implements ArmableDesarmable, Serializable, Cloneable {
     // clase
     public static final String MENSAJE_SIMPLE = "1", MENSAJE_ALARMA = "2", MENSAJE_RECEPCION = "3";
     // instancia
@@ -23,6 +23,18 @@ public class Mensaje implements ArmableDesarmable, Serializable {
         this.descripcion = descripcion;
         this.destinatario = destinatario;
         this.emisor = emisor;
+    }
+    
+    public Object clone() {
+        Mensaje mensaje = null;
+        try {
+            mensaje = (Mensaje) super.clone();
+            mensaje.emisor = (Usuario) emisor.clone();
+            mensaje.destinatario = (Usuario) destinatario.clone();
+        }catch (CloneNotSupportedException e) {
+            //esta sobreescrito asi que no hace falta.
+        }
+        return mensaje;
     }
     
     @Override
@@ -55,6 +67,15 @@ public class Mensaje implements ArmableDesarmable, Serializable {
 
     public Usuario getEmisor() {
         return emisor;
+    }
+
+
+    public void setAsunto(String asunto) {
+        this.asunto = asunto;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 
     public void ejecutar(){};

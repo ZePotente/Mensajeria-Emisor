@@ -19,6 +19,9 @@ import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
+import modelo_e.encriptacion.EncriptacionCesarStrategy;
+import modelo_e.encriptacion.IEncriptacionStrategy;
+
 import modelo_e.persistencia.EnvioMensajeDelegate;
 import modelo_e.persistencia.IPersistidor;
 import modelo_e.persistencia.IVerificadorMensajesPendientes;
@@ -38,6 +41,7 @@ public class Sistema extends Observable implements Observer, ILoginAuthenticator
     private Usuario emisor;
     private IVerificadorMensajesPendientes verificadorMensajesPendientes;
     private IPersistidor persistidor;
+    private IEncriptacionStrategy encriptador;
     
     private Sistema() throws NoLecturaConfiguracionException, IOException {
         config = LectorConfiguracion.leerConfig(Sistema.ARCHIVO_CONFIG);
@@ -46,6 +50,7 @@ public class Sistema extends Observable implements Observer, ILoginAuthenticator
         sv = new ServerRecepcion(Sistema.NRO_PUERTO_NOTIFICACION_RECEPCION);
         persistidor = new PersistenciaMensaje();
         verificadorMensajesPendientes = new SchedulerPersistencia(persistidor, this);
+        encriptador = new EncriptacionCesarStrategy();
     }
     
     public void ingresar(Usuario usuario) {
@@ -73,6 +78,9 @@ public class Sistema extends Observable implements Observer, ILoginAuthenticator
     }
 
     public boolean enviarMensaje(Mensaje mensaje) {
+        Mensaje aux = (Mensaje) mensaje.clone();
+        aux.setAsunto(encriptador.encriptar(mensaje.getAsunto()));
+        aux.setDescripcion(encriptador.encriptar(mensaje.getDescripcion()));
         String mensajeString = mensaje.desarmar();
         if (!internetManager.enviarMensaje(this.config.getIPSvMensajes(),
                                             mensaje.getDestinatario().getNombre(),

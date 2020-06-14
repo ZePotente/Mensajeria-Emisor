@@ -1,5 +1,5 @@
 package modelo_e.encriptacion;
 
 public interface IEncriptacionStrategy {
-    public String encriptar(String asunto, String cuerpo);
+    public String encriptar(String cadena);
 }
