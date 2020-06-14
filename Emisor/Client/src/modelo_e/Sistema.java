@@ -41,6 +41,7 @@ public class Sistema extends Observable implements Observer, ILoginAuthenticator
     
     private Sistema() throws NoLecturaConfiguracionException, IOException {
         config = LectorConfiguracion.leerConfig(Sistema.ARCHIVO_CONFIG);
+        config.prueba();
         agenda = new Agenda();
         internetManager = new InternetManager();
         sv = new ServerRecepcion(Sistema.NRO_PUERTO_NOTIFICACION_RECEPCION);

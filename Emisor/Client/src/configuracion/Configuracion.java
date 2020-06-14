@@ -18,7 +18,21 @@ public class Configuracion {
         this.puertoDir2 = Integer.parseInt(puertoDir2);
         this.nroIPSvMensajes = nroIPSvMensajes;
     }
-
+    
+    public void prueba() {
+        System.out.println(
+        "IP Dir1: " + "\n" +
+        this.getNroIPDir1() + "\n" +
+        "Puerto Dir1: " + "\n" +
+        this.getPuertoDir1() + "\n" +
+        "IP Dir2: " + "\n" +
+        this.getNroIPDir2() + "\n" +
+        "Puerto Dir2: " + "\n" +
+        this.getPuertoDir2() + "\n" +
+        "IP SvMsj: " + "\n" +
+        this.getIPSvMensajes());
+        
+    }
     public String getNroIPDir1() {
         return nroIPDir1;
     }
