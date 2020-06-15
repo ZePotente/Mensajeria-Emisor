@@ -28,16 +28,21 @@ public class ControladorVentanaIngresaNombre implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
         if (actionEvent.getActionCommand().equals(InterfazVistaIngresaNombre.CONTINUAR)) {
-            VentanaMensaje ventana = new VentanaMensaje("Panel Emisor");
-            ControladorVentanaMensaje controlador = new ControladorVentanaMensaje(ventana);
-            ventana.setControlador(controlador);
-            try {
-                String nroIP = InetAddress.getLocalHost().getHostAddress();
-                sistema.ingresar(new Usuario(vista.getNombre(), nroIP));
-                ventana.abrir();
-                vista.cerrar();
-            } catch (UnknownHostException e) {
-                System.out.println("Error al obtener el numero de IP");
+            String nombre = vista.getNombre();
+            if (nombre != null && !nombre.isEmpty()) {
+                VentanaMensaje ventana = new VentanaMensaje(nombre);
+                ControladorVentanaMensaje controlador = new ControladorVentanaMensaje(ventana);
+                ventana.setControlador(controlador);
+                try {
+                    String nroIP = InetAddress.getLocalHost().getHostAddress();
+                    sistema.ingresar(new Usuario(nombre, nroIP));
+                    ventana.abrir();
+                    vista.cerrar();
+                } catch (UnknownHostException e) {
+                    System.out.println("Error al obtener el numero de IP");
+                }
+            } else {
+                vista.mostrarMensaje("Ingrese un nombre valido");
             }
         }
     }

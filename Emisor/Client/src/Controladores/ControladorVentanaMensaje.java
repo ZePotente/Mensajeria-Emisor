@@ -1,6 +1,6 @@
 package controladores;
 
-import excepciones.NoConexionException;
+import Excepciones.NoConexionException;
 
 import modelo_e.mensaje.Mensaje;
 
@@ -83,7 +83,7 @@ public class ControladorVentanaMensaje implements ActionListener, Observer {
             mensaje = crearMensaje(asunto, cuerpo, destinatario);
             if (mensaje != null) {
                 boolean envioExitoso = sistema.enviarMensaje(mensaje);
-                String mensajeAMostrar = envioExitoso ? "Mensaje enviado con exito" : "Error al enviar el mensaje";
+                String mensajeAMostrar = envioExitoso ? "Mensaje enviado con exito" : "Error al enviar el mensaje (Guardado para futuro envio automatico)";
                 vista.mostrarMensaje(mensajeAMostrar);
             }
         }
