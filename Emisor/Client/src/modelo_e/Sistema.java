@@ -56,6 +56,7 @@ public class Sistema extends Observable implements Observer, ILoginAuthenticator
     public void ingresar(Usuario usuario) {
         emisor = usuario;
         internetManager.addObserver(this);
+        sv.addObserver(this);
         verificadorMensajesPendientes.ejecutar();
     }
     

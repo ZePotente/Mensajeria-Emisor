@@ -25,7 +25,7 @@ public class ServerRecepcion extends Observable implements IServerRecepcion {
                 sv = new ServerSocket(puerto);
                 while (true) {
                     try (Socket socket = sv.accept();
-                         BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));) 
+                        BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));) 
                     {
                         String nombreDestinatario = in.readLine();
                         
