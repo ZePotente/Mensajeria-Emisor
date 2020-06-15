@@ -28,46 +28,49 @@ public class PersistenciaMensaje<T> implements IPersistidor {
 
     @Override
     public void guardarDatos(Object object) {
-        try {
-            FileOutputStream file = new FileOutputStream(fileName, true);
-            ObjectOutputStream output = new ObjectOutputStream(file);
-            output.writeObject(object);
-            output.flush();
-            output.close();
-            file.close();
-        } catch (IOException e) {
-            
+        synchronized(fileName) { //no se si funcione pero es la manera mas directa de que no se superpongan
+            try {
+                FileOutputStream file = new FileOutputStream(fileName, true);
+                ObjectOutputStream output = new ObjectOutputStream(file);
+                output.writeObject(object);
+                output.flush();
+                output.close();
+                file.close();
+            } catch (IOException e) {
+                
+            }
         }
     }
 
     @Override
     public Object recuperarDatos() {
-        ArrayList<Object> objectsList = new ArrayList<>();
-        File file = new File(fileName);
-        try {
-            FileInputStream fileStream = new FileInputStream(file);
-            boolean cont = true;
-            while (cont) {
-                Object obj = null;
-                try {
-                    ObjectInputStream input = new ObjectInputStream(fileStream);
-                    obj = input.readObject();
-                } catch (ClassNotFoundException e) {
+        synchronized(fileName) {//no se si funcione pero es la manera mas directa de que no se superpongan
+            ArrayList<Object> objectsList = new ArrayList<>();
+            File file = new File(fileName);
+            try {
+                FileInputStream fileStream = new FileInputStream(file);
+                boolean cont = true;
+                while (cont) {
+                    Object obj = null;
+                    try {
+                        ObjectInputStream input = new ObjectInputStream(fileStream);
+                        obj = input.readObject();
+                    } catch (ClassNotFoundException e) {
+                    }
+                    if (obj != null) {
+                      objectsList.add(obj);
+                    } else {
+                      cont = false;
+                    }
                 }
-                if (obj != null) {
-                  objectsList.add(obj);
-                } else {
-                  cont = false;
-                }
+            } catch (FileNotFoundException e) {
+            } catch (IOException e) {
             }
-        } catch (FileNotFoundException e) {
-        } catch (IOException e) {
+            try {
+                new PrintWriter(fileName).close();
+            } catch (FileNotFoundException e) {
+            }
+            return objectsList;
         }
-        try {
-            new PrintWriter(fileName).close();
-        } catch (FileNotFoundException e) {
-        }
-        return objectsList;
-        
     }
 }
