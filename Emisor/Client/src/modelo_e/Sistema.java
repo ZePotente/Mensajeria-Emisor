@@ -1,6 +1,6 @@
 package modelo_e;
 
-import excepciones.NoConexionException;
+import Excepciones.NoConexionException;
 import configuracion.NoLecturaConfiguracionException;
 
 import modelo_e.mensaje.Mensaje;

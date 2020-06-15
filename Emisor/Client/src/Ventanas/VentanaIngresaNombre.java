@@ -12,6 +12,7 @@ import javax.swing.JFrame;
 
 import javax.swing.JLabel;
 
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import vistas.InterfazVistaIngresaNombre;
@@ -54,5 +55,10 @@ public class VentanaIngresaNombre extends JFrame implements InterfazVistaIngresa
     @Override
     public String getNombre() {
         return textFieldNombre.getText();
+    }
+
+    @Override
+    public void mostrarMensaje(String mensaje) {
+        JOptionPane.showMessageDialog(null, mensaje);
     }
 }
