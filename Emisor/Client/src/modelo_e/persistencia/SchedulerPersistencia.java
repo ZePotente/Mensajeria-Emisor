@@ -31,7 +31,7 @@ public class SchedulerPersistencia implements IVerificadorMensajesPendientes {
                         ArrayList<Mensaje> mensajesEnvioFallido = new ArrayList<>();
                         for (Mensaje mensaje: mensajesPendientes) {
                             if (!delegado.enviarMensaje(mensaje)) {
-                                mensajesEnvioFallido.add(mensaje);
+                                mensajesEnvioFallido.add(mensaje); //?
                             }
                         }
                     }
