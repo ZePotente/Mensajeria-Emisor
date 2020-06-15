@@ -14,7 +14,7 @@ import java.net.UnknownHostException;
 
 import java.util.Observable;
 
-public class InternetManager extends Observable implements IInternetManager {
+public class InternetManager implements IInternetManager {
     public InternetManager() {
         
     }
