@@ -35,7 +35,6 @@ public class ServerRecepcion extends Observable implements IServerRecepcion {
                         //tampoco deberia ir aca.
                         System.out.println("Error al recibir una notificacion de recepcion.");
                     }
-        
                 }
                 } catch (IOException e) {
                     // lastima
